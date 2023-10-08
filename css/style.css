@@ -525,8 +525,27 @@ input:valid{
     width: fit-content;
     cursor: pointer;
     font-size: min(100%, 1.5vw);
+    border-width: 1px;
+    border-color: #cccbcb;
 }
 
 .botones input:hover{
     background-color: #d1d1cb;
 }
+
+#btn_cancelar{
+    background-color: #f1e3e3;
+}
+
+#btn_cancelar:hover{
+    background-color: #dbc7c7;
+}
+
+#btn_enviar{
+    background-color: #e2ece4;
+}
+
+#btn_enviar:hover{
+    background-color: #bdcfc1;
+}
+
