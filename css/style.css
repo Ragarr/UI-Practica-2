@@ -404,3 +404,117 @@ footer {
     text-decoration: underline;
 }
 
+/*----------VENTANA DE REGISTRO----------------*/
+
+#open_reg{
+    height: 100%;
+    background-color: #B4B4B3;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    color: #ce5b18;
+    font-size: min(250%,3.5vw);
+    text-align: center;
+    text-decoration: none;
+    font-family: "flegrei";
+    border: none;
+}
+
+#open_reg:hover{
+    height: 100%;
+    background-color: #9e9e9e; 
+    font-style: oblique; 
+}
+
+.popup_container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+    z-index: 10;
+    visibility: hidden;
+    transition: visibility 0s, opacity 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup_content {
+    height: fit-content;
+    width: 80%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    background-color: #EBE4D1;
+    border-radius: 20px;
+    padding: 5%;
+    padding-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    
+.popuptitle_and_cross {
+    width: 80%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup_content h1{
+    background-color: #EBE4D1;
+    font-size: min(300%,4vw);
+    margin: 0;
+    padding: 0;
+}
+
+.close {
+    font-size: min(300%,5vw);
+    font-family: "flegrei";
+}
+
+.close:hover {
+    cursor: pointer;
+    color: #ce5b18;
+}
+
+#formulario {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-family: "carlmarx";
+    font-size: min(175%, 2.5vw);
+    float: left;
+}
+
+input{
+    border-width: 1px;
+    border-radius: 8px;
+    border-color:  #9e9e9e;
+    height: 3vh;
+    width: 30vw;
+    margin-bottom: 5%;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botones input{
+    width: auto;
+    cursor: pointer;
+}
+
+.botones input:hover{
+    background-color: #d1d1cb;
+}
