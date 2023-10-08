@@ -505,7 +505,11 @@ input{
 }
 
 input:invalid{
-    background-color: rgb(231, 217, 217);
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
 }
 
 .botones {
