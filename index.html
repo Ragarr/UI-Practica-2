@@ -50,22 +50,23 @@
                             <div>
                                 <label for="dni">DNI:</label>
                                 <input type="text" id="dni" name="dni" required 
-                                placeholder="55555555K" pattern="[0-9]{8}[A-Z]{1}">
+                                placeholder="55555555K">
                             </div>
                             <div>
                                 <label for="nombre y apellidos">Nombre y Apellidos:</label>
                                 <input type="text" id="nom_ap" name="nom_ap" required
-                                placeholder="Nombre Apellido1 Apellido2*">
+                                placeholder="Nombre Apellido1 Apellido2*" 
+                                pattern="(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$">
                             </div>
                             <div>
                                 <label for="telf">Teléfono:</label>
-                                <input type="text" id="telf" name="telf" required
-                                placeholder="666666666">
+                                <input type="tel" id="telf" name="telf" required
+                                placeholder="923200014" pattern="[9,8]{1}[1-8]{1}[0-9]{7}">
                             </div>
                             <div>
                                 <label for="email">Correo Electrónico:</label>
-                                <input type="text" id="email" name="email" required
-                                placeholder="nombre@dominio.ext">
+                                <input type="email" id="email" name="email" required
+                                placeholder="nombre@dominio.ext" >
                             </div>
                             <div class="botones">
                                 <div id="btn_cancelar_limpiar">

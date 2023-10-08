@@ -1,5 +1,8 @@
 
-// Ventana emergente para registro de usuario
+
+
+// ---------------------- Ventana emergente para registro de usuario ---------------------
+
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupButton = document.getElementById("open_reg");
     const closePopupButton = document.getElementById("close_reg");
@@ -27,6 +30,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+// -------------------------------- Comprobación del DNI -------------------------
+
+document.addEventListener("DOMContentLoaded", function () {
+    var dni_input = document.getElementById("dni");
+
+    dni_input.addEventListener("input", function(event) {
+        
+        // Patrón quew debe seguir un DNI
+        const DNI_pattern = /^[0-9]{8}[A-Z]{1}$/
+        // Letras que toma el DNI dependiendo del resto
+        const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 
+                        'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+
+        var dni = event.target.value;
+
+        // Comprobamos si el DNI tiene 8 dígitos y una letra
+        if (!DNI_pattern.test(dni)) {
+            event.target.setCustomValidity("El DNI debe tener 8 dígitos y 1 letra");
+        } else {
+            // Obtenemos los números
+            var numDNI = parseInt(dni.substring(0, 8));
+            // Obtenemos la letra
+            var letraDNI = dni.substring(8, 9);
+            // Calculamos la letra correspondiente al número
+            var letraCorrecta = letras[numDNI % 23];
+
+            if (letraDNI !== letraCorrecta) {
+                event.target.setCustomValidity("El DNI no es correcto");
+            } else {
+                event.target.setCustomValidity(""); // La entrada es válida
+            }
+        }
+    });
+});
+
+
+// ------------------------- Función del botón de cancelar registro --------------------
 
 function cancelarRegistro() {
     // Realiza la acción deseada, como redireccionar a otra página o mostrar un mensaje

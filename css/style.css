@@ -505,6 +505,10 @@ input{
     margin-bottom: 5%;
 }
 
+input:invalid{
+    background-color: rgb(231, 217, 217);
+}
+
 .botones {
     display: flex;
     justify-content: space-between;
