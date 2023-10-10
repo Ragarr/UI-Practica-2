@@ -1,31 +1,28 @@
-
-
-
 // ---------------------- Ventana emergente para registro de usuario ---------------------
 
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupButton = document.getElementById("open_reg");
     const closePopupButton = document.getElementById("close_reg");
-    const registrationPopup = document.getElementById("reg_popup");
+    const pedidoPopup = document.getElementById("reg_popup");
 
     openPopupButton.addEventListener("click", function () {
-        registrationPopup.style.display = "flex";
-        registrationPopup.style.visibility = "visible";
+        pedidoPopup.style.display = "flex";
+        pedidoPopup.style.visibility = "visible";
     });
 
     closePopupButton.addEventListener("click", function () {
-        registrationPopup.style.display = "none";
+        pedidoPopup.style.display = "none";
     });
 
     // Close the pop-up if the user clicks outside of it
     window.addEventListener("click", function (event) {
-        if (event.target === registrationPopup) {
-            registrationPopup.style.display = "none";
+        if (event.target === pedidoPopup) {
+            pedidoPopup.style.display = "none";
         }
     });
 
     // Prevent the pop-up from closing when clicking inside the form
-    registrationPopup.querySelector("form").addEventListener("click", function (event) {
+    pedidoPopup.querySelector("form").addEventListener("click", function (event) {
         event.stopPropagation();
     });
 });
@@ -76,3 +73,34 @@ function cancelarRegistro() {
     // O redirige a otra página:
     window.location.href = "index.html";
 }
+
+
+
+// ----------------------- Ventana emergente para hacer un pedido --------------------
+
+document.addEventListener("DOMContentLoaded", function () {
+    const openPopupButton = document.getElementById("open_pedido");
+    const closePopupButton = document.getElementById("close_pedido");
+    const pedidoPopup = document.getElementById("pedido_popup");
+
+    openPopupButton.addEventListener("click", function () {
+        pedidoPopup.style.display = "flex";
+        pedidoPopup.style.visibility = "visible";
+    });
+
+    closePopupButton.addEventListener("click", function () {
+        pedidoPopup.style.display = "none";
+    });
+
+    // Close the pop-up if the user clicks outside of it
+    window.addEventListener("click", function (event) {
+        if (event.target === pedidoPopup) {
+            pedidoPopup.style.display = "none";
+        }
+    });
+
+    // Prevent the pop-up from closing when clicking inside the form
+    pedidoPopup.querySelector("form").addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
