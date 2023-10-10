@@ -98,9 +98,24 @@ document.addEventListener("DOMContentLoaded", function () {
             pedidoPopup.style.display = "none";
         }
     });
+});
 
-    // Prevent the pop-up from closing when clicking inside the form
-    pedidoPopup.querySelector("form").addEventListener("click", function (event) {
-        event.stopPropagation();
-    });
+// BOTONES DE SELECCION DE PEDIDO
+
+document.addEventListener("DOMContentLoaded", function () {
+    const platosMenu = document.getElementsByClassName("plato_menu");
+    
+    for (var platoMenu of platosMenu){
+        var buttons = platoMenu.getElementsByTagName("button");
+        var contador = platoMenu.getElementsByTagName("p")[1]; // Accede al primer elemento <p>
+        var button_add = buttons[0];
+        var button_remove = buttons[1];
+        button_add.addEventListener("click", function(){
+            var val_contador = parseInt(contador.innerText)+1;
+            contador.innerText = val_contador;
+            
+        });
+    }
+
+
 });
