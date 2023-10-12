@@ -86,16 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
     openPopupButton.addEventListener("click", function () {
         pedidoPopup.style.display = "flex";
         pedidoPopup.style.visibility = "visible";
+        document.body.style.overflow = "hidden";
+        
     });
 
     closePopupButton.addEventListener("click", function () {
         pedidoPopup.style.display = "none";
+        body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
+
     });
 
     // Close the pop-up if the user clicks outside of it
     window.addEventListener("click", function (event) {
         if (event.target === pedidoPopup) {
             pedidoPopup.style.display = "none";
+            body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
         }
     });
 });
