@@ -588,10 +588,14 @@ ul.breadcrumb {
     overflow: auto;
     flex-direction: column;
   }
-
+#carrito_container{
+    width: 100%;
+}
 #carrito{
+    margin-right: 20px;
     width: fit-content;
     float: right;
+    font-family: "carlmarx","flegrei";
   } 
 
 .plato_menu{
