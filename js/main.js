@@ -101,21 +101,39 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // BOTONES DE SELECCION DE PEDIDO
+document.addEventListener("DOMContentLoaded", function() {
+    const platosMenu = document.querySelectorAll('.plato_menu');
 
-document.addEventListener("DOMContentLoaded", function () {
-    const platosMenu = document.getElementsByClassName("plato_menu");
-    
-    for (var platoMenu of platosMenu){
-        var buttons = platoMenu.getElementsByTagName("button");
-        var contador = platoMenu.getElementsByTagName("p")[1]; // Accede al primer elemento <p>
-        var button_add = buttons[0];
-        var button_remove = buttons[1];
-        button_add.addEventListener("click", function(){
-            var val_contador = parseInt(contador.innerText)+1;
-            contador.innerText = val_contador;
-            
+    platosMenu.forEach(plato => {
+        var botonMas = plato.querySelector('.añadir_producto');
+        var botonMenos = plato.querySelector('.eliminar_producto');
+        var contador = plato.querySelector('.contador');
+        botonMas.addEventListener('click', function() {
+            contador.innerText = parseInt(contador.innerText) + 1;
+            actualizarCarrito();
         });
-    }
+        botonMenos.addEventListener('click', function() {
+            if (contador.innerText > 0) {
+                contador.innerText = parseInt(contador.innerText) - 1;
+                actualizarCarrito();
+            }
+        });
 
-
+    });
 });
+
+
+// contador del carrito
+function actualizarCarrito() {
+    var carrito = document.getElementById("carrito");
+    var contador = 0;
+    var suma = 0;
+    var platosMenu = document.getElementsByClassName("plato_menu");
+    for (var platoMenu of platosMenu){
+        var contador = platoMenu.getElementsByTagName("p")[2]; // El contador está en la tercera posición
+        contador = parseInt(contador.innerText);
+        suma += contador;
+    }
+    carrito.innerText = suma;
+
+}

@@ -592,25 +592,41 @@ ul.breadcrumb {
     float: right;
   } 
 
-  .plato_menu{
+.plato_menu{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
+}
 
-  .seleccion_producto{
+.seleccion_producto{
     justify-content: center;
     align-items: center;
     width: fit-content;
     display: flex;
     flex-direction: row;
   }
-  .seleccion_producto button{
+.seleccion_producto button{
     width: 4vw;
     height: 4vw;
-  }
-  .seleccion_producto p{
+}
+.seleccion_producto p{
     margin-left: 5px;
     margin-right: 5px;
-  }
+}
+
+.precio {
+    flex-grow: 1;
+    text-align: right;
+    display: flex;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.plato_menu .precio::before{  
+    content:'';
+    background: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 2px, transparent 4px);
+    height: 1px;
+    flex-grow: 1;
+    display: inline-block;
+    margin-top: 1em;
+}
