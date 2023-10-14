@@ -194,6 +194,7 @@ function irPaso2(){
     Paso2.style.display = "flex";
     miga_paso_2.style.color = "#01447e";
     miga_paso_3.style.color = "#b3bec9";
+
 }
 
 // Funcion para ir a paso 2

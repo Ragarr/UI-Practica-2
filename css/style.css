@@ -597,11 +597,6 @@ ul.breadcrumb li a {
     color: #01447e;
 }
 
-ul.breadcrumb li a:hover {
-    color: #01447e;
-    text-decoration: underline;
-}
-
 #pedido_popup .popup_content{
     height: 70vh;
 }
