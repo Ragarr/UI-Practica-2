@@ -197,15 +197,44 @@ function irPaso2(){
 
 }
 
-// Funcion para ir a paso 2
-function irPaso3(){
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const timer = document.getElementById("timer");
+    const btn_ir_paso_3 = document.getElementById("btn_ir_paso_3");
     const Paso2 = document.getElementById("revision_pedido");
     const Paso3 = document.getElementById("estado_pedido");
     const miga_paso_3 = document.getElementById("paso_3");
 
-    Paso2.style.visibility = "hidden";
-    Paso2.style.display = "none";
-    Paso3.style.visibility = "visible";
-    Paso3.style.display = "flex";
-    miga_paso_3.style.color = "#01447e";
-}
+    const startTime = 600; // 10 minutes in seconds
+    let remainingTime = startTime;
+    let interval;
+
+    function updateTimer() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (remainingTime <= 0) {
+            clearInterval(interval);
+            timer.textContent = "0:00";
+        } else {
+            remainingTime--;
+        }
+    }
+
+    // Para evitar delay
+    updateTimer();
+
+    btn_ir_paso_3.addEventListener("click", function() {
+        if (!interval) {
+            interval = setInterval(updateTimer, 1000);
+        }
+        Paso2.style.visibility = "hidden";
+        Paso2.style.display = "none";
+        Paso3.style.visibility = "visible";
+        Paso3.style.display = "flex";
+        miga_paso_3.style.color = "#01447e";
+    });
+});
+

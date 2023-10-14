@@ -312,7 +312,7 @@
                                 <input type="reset" class="btn_limpiar" value="Limpiar selecciones" onclick="resetProductos()">
                             </div>
                             <div>
-                                <input type="submit" class="btn_enviar" id="btn_ir_paso_2" value="PASO 2 >" onclick="irPaso2()">
+                                <input type="submit" class="btn_enviar" id="btn_ir_paso_2" value="PAGAR >" onclick="irPaso2()">
                             </div>
                         </div>
                     </div>
@@ -321,10 +321,10 @@
                         <div class="botones">
                             <div id="btn_cancelar_limpiar">
                                 <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
-                                <input type="button" class="btn_limpiar" value="< PASO 1" onclick="irPaso1()">
+                                <input type="button" class="btn_limpiar" value="< REVISAR PEDIDO" onclick="irPaso1()">
                             </div>
                             <div>
-                                <input type="submit" class="btn_enviar" value="PASO 3 >" onclick="irPaso3()">
+                                <input type="submit" class="btn_enviar" value="PAGAR" id="btn_ir_paso_3">
                             </div>
                         </div>
                     </div>
@@ -332,14 +332,16 @@
                     
 
                     <div id="estado_pedido">
+                        <div id="texto_final">
+                            <h2>¡Pedido realizado con éxito!</h2>
+                            <p>Su pedido está en camino...</p>
+                            <div class="countdown">
+                                <div id="timer">10:00</div>
+                            </div>
+                            <p>TIEMPO ESTIMADO DE ESPERA</p>
+                        </div>
                         <div class="botones">
-                            <div id="btn_cancelar_limpiar">
-                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
-                                <input type="button" class="btn_limpiar" id="btn_ir_paso_2" value="< PASO 2" onclick="irPaso2()">
-                            </div>
-                            <div>
-                                <input type="submit" class="btn_enviar" value="TERMINAR" onclick="Terminar()">
-                            </div>
+                            <input type="submit" class="btn_cancelar" value="TERMINAR" onclick="cancelarRegistro()"">
                         </div>
                     </div>
                     
