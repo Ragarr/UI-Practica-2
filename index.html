@@ -70,11 +70,11 @@
                             </div>
                             <div class="botones">
                                 <div id="btn_cancelar_limpiar">
-                                    <input type="button" id="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
-                                    <input type="reset" value="Limpiar campos">
+                                    <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
+                                    <input type="reset" class="btn_limpiar" value="Limpiar campos">
                                 </div>
                                 <div>
-                                    <input type="submit" id="btn_enviar">
+                                    <input type="submit" class="btn_enviar">
                                 </div>
                             </div>
                         </form>
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <button class="open_popup" id="open_pedido">Realiaz tu pedido</button>
+            <button class="open_popup" id="open_pedido">Realiza tu pedido</button>
             <div class="popup_container" id="pedido_popup">
                 <div class="popup_content">
                     <div class="popuptitle_and_cross">
@@ -98,6 +98,7 @@
                     </div>
                     <div id = "carrito_container">
                         <div id="carrito">0</div>
+                        <img id="img_carrito" src="media/img/carrito.png" alt="Carrito de la compra">  
                     </div>
                     <div id="elegir_pedido">
                         <h2>Entrantes</h2>
@@ -150,8 +151,8 @@
                                 <button class="eliminar_producto">-</button>
                             </div>
                         </div>
+
                         <h2>Platos Principales</h2>
-                        
                         <div class="plato_menu">
                             <p class="nombre_plato">Tres enchiladas de pollo con arroz y frijoles</p>
                             <p class="precio">$12.99</p>
@@ -191,6 +192,7 @@
                                 <button class="eliminar_producto">-</button>
                             </div>
                         </div>
+
                         <h2>Especialidades</h2>
                         <div class="plato_menu">
                             <p class="nombre_plato">Pozole</p>
@@ -231,6 +233,7 @@
                                 <button class="eliminar_producto">-</button>
                             </div>
                         </div>
+
                         <h2>Postres</h2>
                         <div class="plato_menu">
                             <p class="nombre_plato">Flan casero con caramelo</p>
@@ -271,6 +274,7 @@
                                 <button class="eliminar_producto">-</button>
                             </div>
                         </div>
+
                         <h2>Bebidas</h2>
                         <div class="plato_menu">
                             <p class="nombre_plato">Margarita</p>
@@ -302,12 +306,41 @@
                             </div>
                         </div>
 
+                        <div class="botones">
+                            <div id="btn_cancelar_limpiar">
+                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
+                                <input type="reset" class="btn_limpiar" value="Limpiar selecciones" onclick="resetProductos()">
+                            </div>
+                            <div>
+                                <input type="submit" class="btn_enviar" id="btn_ir_paso_2" value="PASO 2 >" onclick="irPaso2()">
+                            </div>
+                        </div>
                     </div>
+
                     <div id="revision_pedido">
-                        
+                        <div class="botones">
+                            <div id="btn_cancelar_limpiar">
+                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
+                                <input type="button" class="btn_limpiar" value="< PASO 1" onclick="irPaso1()">
+                            </div>
+                            <div>
+                                <input type="submit" class="btn_enviar" value="PASO 3 >" onclick="irPaso3()">
+                            </div>
+                        </div>
                     </div>
-                    <div id="estado_pedido">
                         
+                    
+
+                    <div id="estado_pedido">
+                        <div class="botones">
+                            <div id="btn_cancelar_limpiar">
+                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
+                                <input type="button" class="btn_limpiar" id="btn_ir_paso_2" value="< PASO 2" onclick="irPaso2()">
+                            </div>
+                            <div>
+                                <input type="submit" class="btn_enviar" value="TERMINAR" onclick="Terminar()">
+                            </div>
+                        </div>
                     </div>
                     
                 </div>

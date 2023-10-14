@@ -114,6 +114,12 @@ li {
     list-style-type: none;
 }
 
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /*---------------PÁGINA 1----------------*/
 
@@ -534,69 +540,97 @@ input:valid{
     border-color: #cccbcb;
 }
 
-.botones input:hover{
+.btn_limpiar:hover{
     background-color: #d1d1cb;
 }
 
-#btn_cancelar{
+.btn_cancelar{
     background-color: #f1e3e3;
 }
 
-#btn_cancelar:hover{
+.btn_cancelar:hover{
     background-color: #dbc7c7;
 }
 
-#btn_enviar{
+.btn_enviar{
     background-color: #e2ece4;
 }
 
-#btn_enviar:hover{
+.btn_enviar:hover{
     background-color: #bdcfc1;
 }
 
 /*------------REALIZAR PEEDIDO--------------*/
 
 /*MIGAS DE PAN*/
+
 ul.breadcrumb {
+    margin: 0;
+    margin-bottom: 2%;
+    height: fit-content;
+    width: 55vw;
     padding: 10px 16px;
     list-style: none;
     background-color: #eee;
     border-radius: 20px;
-  }
-  ul.breadcrumb li {
+}
+
+ul.breadcrumb li {
     display: inline;
-    font-size: 18px;
-  }
-  ul.breadcrumb li+li:before {
-    padding: 8px;
+}
+
+ul.breadcrumb li+li:before {
+    padding: 8%;
     color: black;
     content: ">\00a0";
-  }
-  ul.breadcrumb li a {
-    color: #0275d8;
+    font-size: min(200%,2.5vw);
+}
+
+ul.breadcrumb li a {
+    font-family: 'carlmarx', sans-serif !important;
+    color: #b3bec9;
     text-decoration: none;
-  }
-  ul.breadcrumb li a:hover {
+    font-size: min(200%,2.5vw);
+}
+
+#paso_1 {
+    color: #01447e;
+}
+
+ul.breadcrumb li a:hover {
     color: #01447e;
     text-decoration: underline;
-  }
+}
 
+#pedido_popup .popup_content{
+    height: 70vh;
+}
 
 #elegir_pedido{
     width: 100%;
     display: flex;
     overflow: auto;
     flex-direction: column;
-  }
-#carrito_container{
-    width: 100%;
 }
-#carrito{
-    margin-right: 20px;
+
+#carrito_container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+#carrito {
     width: fit-content;
-    float: right;
     font-family: "carlmarx","flegrei";
-  } 
+    font-size: min(175%, 2.5vw);
+    text-align: center;
+}
+
+#img_carrito {
+    width: 5vw;
+    max-width: 100%;
+}
 
 .plato_menu{
     width: 100%;
@@ -612,10 +646,22 @@ ul.breadcrumb {
     display: flex;
     flex-direction: row;
   }
+
 .seleccion_producto button{
     width: 4vw;
-    height: 4vw;
+    height: 3vw;
+    border-radius: 8px;
+    border-width: 1px;
+    font-size: min(200%, 3vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.seleccion_producto button:hover{
+    background-color: #e0e0d3;
+}
+
 .seleccion_producto p{
     margin-left: 5px;
     margin-right: 5px;
@@ -628,6 +674,7 @@ ul.breadcrumb {
     margin-right: 5px;
     margin-left: 5px;
 }
+
 .plato_menu .precio::before{  
     content:'';
     background: repeating-linear-gradient(to right, currentColor, currentColor 1px, transparent 2px, transparent 4px);
@@ -635,4 +682,33 @@ ul.breadcrumb {
     flex-grow: 1;
     display: inline-block;
     margin-top: 1em;
+}
+
+#elegir_pedido .botones{
+    padding: 0;
+}
+
+#pedido_popup .popup_content .popuptitle_and_cross {
+    margin-bottom: 1%;
+}
+
+
+/*------------PASO 2----------------------------*/
+#revision_pedido{
+    visibility: hidden;
+    display: none;
+    width: 100%;
+    overflow: auto;
+    flex-direction: column
+}
+
+
+
+/*------------PASO 3----------------------------*/
+#estado_pedido{
+    visibility: hidden;
+    display: none;
+    width: 100%;
+    overflow: auto;
+    flex-direction: column
 }

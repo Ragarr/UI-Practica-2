@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     closePopupButton.addEventListener("click", function () {
         pedidoPopup.style.display = "none";
         document.body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
+        // Restablece el contenido del formulario
+        var form = pedidoPopup.querySelector("form");
+        form.reset();
     });
 
     // Close the pop-up if the user clicks outside of it
@@ -21,12 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target === pedidoPopup) {
             pedidoPopup.style.display = "none";
             document.body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
+            // Restablece el contenido del formulario
+            var form = pedidoPopup.querySelector("form");
+            form.reset();
         }
-    });
-
-    // Prevent the pop-up from closing when clicking inside the form
-    pedidoPopup.querySelector("form").addEventListener("click", function (event) {
-        event.stopPropagation();
     });
 });
 
@@ -96,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
     closePopupButton.addEventListener("click", function () {
         pedidoPopup.style.display = "none";
         document.body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
-
-
+        // Restablecemos los productos seleccionados
+        resetProductos();
     });
 
     // Close the pop-up if the user clicks outside of it
@@ -106,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pedidoPopup.style.display = "none";
             pedidoPopup.style.overflow = "none"; // Restablece el desplazamiento de la página principal
             document.body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
-
+            resetProductos();
         }
     });
 });
@@ -146,5 +147,64 @@ function actualizarCarrito() {
         suma += contador;
     }
     carrito.innerText = suma;
+}
 
+// Reestablecer contadores
+function resetProductos() {
+    var platosMenu = document.querySelectorAll('.plato_menu');
+    platosMenu.forEach(plato => {
+        var contador = plato.querySelector('.contador');
+        contador.innerText = "0";
+    });
+    actualizarCarrito(); // Restablecer el contador del carrito
+}
+
+// Funcion para ir a paso 1
+function irPaso1(){
+    const Paso1 = document.getElementById("elegir_pedido");
+    const Paso2 = document.getElementById("revision_pedido");
+    const miga_paso_2 = document.getElementById("paso_2");
+    const carrito = document.getElementById("carrito_container");
+
+    Paso2.style.visibility = "hidden";
+    Paso2.style.display = "none";
+    Paso1.style.visibility = "visible";
+    Paso1.style.display = "flex";
+    carrito.style.visibility = "visible";
+    carrito.style.display = "flex";
+    miga_paso_2.style.color = "#b3bec9";
+}
+
+// Funcion para ir a paso 2
+function irPaso2(){
+    const Paso1 = document.getElementById("elegir_pedido");
+    const Paso2 = document.getElementById("revision_pedido");
+    const Paso3 = document.getElementById("estado_pedido");
+    const miga_paso_2 = document.getElementById("paso_2");
+    const miga_paso_3 = document.getElementById("paso_3");
+    const carrito = document.getElementById("carrito_container");
+
+    Paso1.style.visibility = "hidden";
+    Paso1.style.display = "none";
+    Paso3.style.visibility = "hidden";
+    Paso3.style.display = "none";
+    carrito.style.visibility = "hidden";
+    carrito.style.display = "none";
+    Paso2.style.visibility = "visible";
+    Paso2.style.display = "flex";
+    miga_paso_2.style.color = "#01447e";
+    miga_paso_3.style.color = "#b3bec9";
+}
+
+// Funcion para ir a paso 2
+function irPaso3(){
+    const Paso2 = document.getElementById("revision_pedido");
+    const Paso3 = document.getElementById("estado_pedido");
+    const miga_paso_3 = document.getElementById("paso_3");
+
+    Paso2.style.visibility = "hidden";
+    Paso2.style.display = "none";
+    Paso3.style.visibility = "visible";
+    Paso3.style.display = "flex";
+    miga_paso_3.style.color = "#01447e";
 }
