@@ -238,3 +238,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+// Barra progreso reloj
+document.addEventListener("DOMContentLoaded", function() {
+    const barra_progreso = document.getElementById("barra_progreso");
+    const timer = document.getElementById("timer");
+
+    const startTime = 600; // 10 minutes in seconds
+    let remainingTime = startTime;
+    let interval;
+
+    function updateBarraProgreso() {
+        const porcentaje = (remainingTime / startTime) * 100;
+        console.log(porcentaje, remainingTime, startTime);
+        barra_progreso.style.width = `${porcentaje}%`;
+        remainingTime--;
+    }
+
+    // Para evitar delay
+    updateBarraProgreso();
+
+    if (!interval) {
+        interval = setInterval(updateBarraProgreso, 1000);
+    }
+});
