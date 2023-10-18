@@ -72,14 +72,17 @@ function closePedidoPopup() {
     pedido_popup.style.display = "none";
     pedido_popup.style.overflow = "none"; // Restablece el desplazamiento de la página principal
     document.body.style.overflow = "auto"; // Restablece el desplazamiento de la página principal
-    resetProductos();
 }
 function resetProductos() {
     var platosMenu = document.querySelectorAll('.plato_menu');
-    platosMenu.forEach(plato => {
-        var contador = plato.querySelector('.contador');
-        contador.innerText = "0";
-    });
+    try{
+        platosMenu.forEach(plato => {
+            var contador = plato.querySelector('.contador');
+            contador.innerText = "0";
+        });
+    }catch{
+        console.log("No se ha podido restablecer el contador de los productos");
+    }
     contenido_pedido = [];
     actualizarContadorCarrito(); // Restablecer el contador del carrito
 }
