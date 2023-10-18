@@ -162,8 +162,26 @@ function irEstado() {
     miga_paso_3.style.color = "#b3bec9";
     current_order_step = 3; // Paso actual del pedido
     console.log("Paso actual: " + current_order_step);
+    const timer = document.getElementById("timer");
+
+    const startTime = 600; // 10 minutes in seconds
+    let remainingTime = startTime;
+    let interval;
 }
 
+function updateTimer() {
+    
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+    timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+    if (remainingTime <= 0) {
+        clearInterval(interval);
+        timer.textContent = "0:00";
+    } else {
+        remainingTime--;
+    }
+}
 
 
 
@@ -204,11 +222,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // botones de navegación entre pasos
     const bc_revisar = document.getElementById("bc_revisar");
-    const bc_estado = document.getElementById("bc_estado");
     const bc_seleccionar = document.getElementById("bc_seleccionar");
 
     bc_revisar.addEventListener("click", irRevisar);
     bc_seleccionar.addEventListener("click", irSeleccionar);
+
+    const botonIrPaso1 = document.getElementById("btn_ir_paso_1");
+    const botonIrPaso2 = document.getElementById("btn_ir_paso_2");
+    const botonIrPaso3 = document.getElementById("btn_ir_paso_3");
+
+    botonIrPaso1.addEventListener("click", irSeleccionar);
+    botonIrPaso2.addEventListener("click", irRevisar);
+    botonIrPaso3.addEventListener("click", irEstado);
+
+
 
 
 });
