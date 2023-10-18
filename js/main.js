@@ -180,7 +180,6 @@ function irRevisar() {
     }
     actualizar_lista_pedido();
 }
-
 function actualizar_lista_pedido() {
     const lista_pedido = document.getElementById("lista_pedido");
     for (i = 0; i < contenido_pedido.length; i++) {
@@ -211,10 +210,11 @@ function actualizar_total_pedido() {
     total_pedido.innerText = total;
 }
 
-
+// ir al paso 3
 function irEstado() {
     const Paso2 = document.getElementById("revision_pedido");
     const Paso3 = document.getElementById("estado_pedido");
+    const miga_paso_1 = document.getElementById("bc_seleccionar");
     const miga_paso_2 = document.getElementById("bc_revisar");
     const miga_paso_3 = document.getElementById("bc_estado");
 
@@ -222,8 +222,9 @@ function irEstado() {
     Paso2.style.display = "none";
     Paso3.style.visibility = "visible";
     Paso3.style.display = "flex";
-    miga_paso_2.style.color = "#b3bec9";
-    miga_paso_3.style.color = "#b3bec9";
+    miga_paso_2.style.color = "#01447e";
+    miga_paso_3.style.color = "#01447e";
+    miga_paso_1.style.color = "#01447e";
     current_order_step = 3; // Paso actual del pedido
     if (!interval) {
         interval = setInterval(updateTimer, 1000);
