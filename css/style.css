@@ -580,7 +580,7 @@ ul.breadcrumb li {
 }
 
 ul.breadcrumb li+li:before {
-    padding: 8%;
+    padding: 2%;
     color: black;
     content: ">\00a0";
     font-size: min(200%,2.5vw);
@@ -591,6 +591,12 @@ ul.breadcrumb li a {
     color: #b3bec9;
     text-decoration: none;
     font-size: min(200%,2.5vw);
+}
+
+ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #paso_1 {
