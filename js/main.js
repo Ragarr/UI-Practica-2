@@ -185,6 +185,7 @@ function irRevisar() {
 }
 function actualizar_lista_pedido() {
     const lista_pedido = document.getElementById("lista_pedido");
+    lista_pedido.innerHTML = "";
     for (i = 0; i < contenido_pedido.length; i++) {
         var plato = contenido_pedido[i];
         var nombre = plato.nombre;
