@@ -2,6 +2,8 @@
 var current_order_step = 0; // Paso actual del pedido
 var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
+var contenido_pedido = {}; // Contenido del pedido nombre_plato: cantidad
+
 
 // REGISTRO
 function openRegPopup() {
@@ -71,47 +73,52 @@ function resetProductos() {
         var contador = plato.querySelector('.contador');
         contador.innerText = "0";
     });
-    actualizarCarrito(); // Restablecer el contador del carrito
+    contenido_pedido = {};
+    actualizarContadorCarrito(); // Restablecer el contador del carrito
 }
 // botones de seleccion del pedido
 function añadir_producto(event) {
+    if (!contenido_pedido[event.target.parentNode.id]) {
+        contenido_pedido[event.target.parentNode.id] = Number(0);
+    }
+    contenido_pedido[event.target.parentNode.id] += 1;
     var contador = event.target.parentNode.querySelector('.contador');
     contador.innerText = parseInt(contador.innerText) + 1;
-    actualizarCarrito();
+    actualizarContadorCarrito();
 }
 function quitar_producto(event) {
     var contador = event.target.parentNode.querySelector('.contador');
-    if (parseInt(contador.innerText) > 0) {
+    if (!contenido_pedido[event.target.parentNode.id]) {
+        contenido_pedido[event.target.parentNode.id] = Number(0);
+    }
+    else if (contenido_pedido[event.target.parentNode.id] > 0) {
+        contenido_pedido[event.target.parentNode.id] -= 1;
         contador.innerText = parseInt(contador.innerText) - 1;
     }
-    actualizarCarrito();
+    actualizarContadorCarrito();
 }
 
-function actualizarCarrito() {
+function actualizarContadorCarrito() {
     var carrito = document.getElementById("carrito");
     var contador = 0;
-    var suma = 0;
-    var platosMenu = document.getElementsByClassName("plato_menu");
-    for (var platoMenu of platosMenu){
-        var contador = platoMenu.getElementsByTagName("p")[2]; // El contador está en la tercera posición
-        contador = parseInt(contador.innerText);
-        suma += contador;
+    for (const [nombre_plato, cantidad] of Object.entries(contenido_pedido)) {
+
+        contador += cantidad;
     }
-    carrito.innerText = suma;
+
+    carrito.innerText = contador;
 }
 
 // funciones de navegación en los pasos del pedido
 // ir al paso 1
 function irSeleccionar() {
     if (current_order_step != 2) {
-        console.log("No se puede volver al paso 1 si no se ha pasado por el paso 2");
         return; // No se puede volver al paso 1 si no se ha pasado por el paso 2
     }
     const Paso1 = document.getElementById("seleccionar_productos");
     const Paso2 = document.getElementById("revision_pedido");
     const miga_paso_2 = document.getElementById("bc_revisar");
     const carrito = document.getElementById("carrito_container");
-    console.log("Cambiar a paso 1");
     Paso2.style.visibility = "hidden";
     Paso2.style.display = "none";
     Paso1.style.visibility = "visible";
@@ -119,7 +126,6 @@ function irSeleccionar() {
     carrito.style.visibility = "visible";
     carrito.style.display = "flex";
     current_order_step = 1; // Paso actual del pedido
-    console.log("Paso actual: " + current_order_step);
 }
 // ir al paso 2
 function irRevisar() {
@@ -146,7 +152,6 @@ function irRevisar() {
     if (current_order_step == 1) {
         current_order_step = 2; // Paso actual del pedido
     }
-    console.log("Paso actual: " + current_order_step);
 }
 function irEstado() {
     const Paso2 = document.getElementById("revision_pedido");
@@ -161,7 +166,6 @@ function irEstado() {
     miga_paso_2.style.color = "#b3bec9";
     miga_paso_3.style.color = "#b3bec9";
     current_order_step = 3; // Paso actual del pedido
-    console.log("Paso actual: " + current_order_step);
     if (!interval) {
         interval = setInterval(updateTimer, 1000);
     }
@@ -204,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
             closePedidoPopup();
         }
     });
-    
+
     // botones de seleccion del pedido
     const platosMenu = document.querySelectorAll('.plato_menu');
     platosMenu.forEach(plato => {
