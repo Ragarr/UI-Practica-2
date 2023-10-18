@@ -243,6 +243,10 @@ function updateTimer() {
     } else {
         remainingTime--;
     }
+    // actualizar barra de progreso
+    const barra_progreso = document.getElementById("barra_progreso");
+    const porcentaje = (remainingTime / 600) * 100;
+    barra_progreso.style.width = porcentaje + "%";
 }
 
 
