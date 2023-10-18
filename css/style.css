@@ -601,7 +601,7 @@ ul.breadcrumb li a {
     height: min(fit-content, 70vh);
 }
 
-#elegir_pedido{
+#seleccionar_productos{
     width: 100%;
     display: flex;
     overflow: auto;
@@ -679,7 +679,7 @@ ul.breadcrumb li a {
     margin-top: 1em;
 }
 
-#elegir_pedido .botones{
+#seleccionar_productos .botones{
     padding: 0;
 }
 

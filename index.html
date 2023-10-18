@@ -70,7 +70,6 @@
                             </div>
                             <div class="botones">
                                 <div id="btn_cancelar_limpiar">
-                                    <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
                                     <input type="reset" class="btn_limpiar" value="Limpiar campos">
                                 </div>
                                 <div>
@@ -91,16 +90,16 @@
                     </div>
                     <div>
                         <ul class="breadcrumb">
-                            <li><a id="paso_1">Paso 1</a></li>
-                            <li><a id="paso_2">Paso 2</a></li>
-                            <li><a id="paso_3">Paso 3</a></li>
+                            <li><a id="bc_seleccionar">Seleccionar productos</a></li>
+                            <li><a id="bc_revisar">Revisar y pagar</a></li>
+                            <li><a id="bc_estado">Estado del pedido</a></li>
                           </ul>
                     </div>
                     <div id = "carrito_container">
                         <div id="carrito">0</div>
                         <img id="img_carrito" src="media/img/carrito.png" alt="Carrito de la compra">  
                     </div>
-                    <div id="elegir_pedido">
+                    <div id="seleccionar_productos">
                         <h2>Entrantes</h2>
                         <div class="plato_menu">
                             <p class="nombre_plato">Nachos con guacamole casero</p>
@@ -308,11 +307,11 @@
 
                         <div class="botones">
                             <div id="btn_cancelar_limpiar">
-                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
-                                <input type="reset" class="btn_limpiar" value="Limpiar selecciones" onclick="resetProductos()">
+                                <input type="button" class="btn_cancelar" value="Cancelar">
+                                <input type="reset" class="btn_limpiar" id ="limpiar_selecciones" value="Limpiar selecciones" >
                             </div>
                             <div>
-                                <input type="submit" class="btn_enviar" id="btn_ir_paso_2" value="PAGAR >" onclick="irPaso2()">
+                                <input type="submit" class="btn_enviar" id="btn_ir_paso_2" value="PAGAR >" >
                             </div>
                         </div>
                     </div>
@@ -320,8 +319,8 @@
                     <div id="revision_pedido">
                         <div class="botones">
                             <div id="btn_cancelar_limpiar">
-                                <input type="button" class="btn_cancelar" value="Cancelar" onclick="cancelarRegistro()">
-                                <input type="button" class="btn_limpiar" value="< REVISAR PEDIDO" onclick="irPaso1()">
+                                <input type="button" class="btn_cancelar" value="Cancelar">
+                                <input type="button" class="btn_limpiar" value="< REVISAR PEDIDO">
                             </div>
                             <div>
                                 <input type="submit" class="btn_enviar" value="PAGAR" id="btn_ir_paso_3">
@@ -342,7 +341,7 @@
                             <p>TIEMPO ESTIMADO DE ESPERA</p>
                         </div>
                         <div class="botones">
-                            <input type="submit" class="btn_cancelar" value="TERMINAR" onclick="cancelarRegistro()"">
+                            <input type="submit" class="btn_cancelar" value="TERMINAR">
                         </div>
                     </div>
                     
