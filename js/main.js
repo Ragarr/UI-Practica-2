@@ -1,7 +1,7 @@
 // VARIABLES GLOBALES
 var current_order_step = 0; // Paso actual del pedido
-
-
+var remainingTime = 600; // Tiempo restante en segundos
+var interval; // Intervalo de tiempo para actualizar el temporizador
 
 // REGISTRO
 function openRegPopup() {
@@ -162,11 +162,9 @@ function irEstado() {
     miga_paso_3.style.color = "#b3bec9";
     current_order_step = 3; // Paso actual del pedido
     console.log("Paso actual: " + current_order_step);
-    const timer = document.getElementById("timer");
-
-    const startTime = 600; // 10 minutes in seconds
-    let remainingTime = startTime;
-    let interval;
+    if (!interval) {
+        interval = setInterval(updateTimer, 1000);
+    }
 }
 
 function updateTimer() {
@@ -186,16 +184,6 @@ function updateTimer() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    // cierre de los popup cuando el usuario hace click fuera de ellos
-    window.addEventListener("click", function (event) {
-        if (event.target === reg_popup) {
-            closeRegPopup();
-        } else if (event.target === pedido_popup) {
-            closePedidoPopup();
-        }
-    });
-
-
     // apertura y cierre del popup de registro
     const openRegButton = document.getElementById("open_reg");
     const closeRegButton = document.getElementById("close_reg");
@@ -208,6 +196,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const closePedidoButton = document.getElementById("close_pedido");
     openPedidoButton.addEventListener("click", openPedidoPopup);
     closePedidoButton.addEventListener("click", closePedidoPopup);
+    // cierre de los popup cuando el usuario hace click fuera de ellos
+    window.addEventListener("click", function (event) {
+        if (event.target === reg_popup) {
+            closeRegPopup();
+        } else if (event.target === pedido_popup) {
+            closePedidoPopup();
+        }
+    });
+    
     // botones de seleccion del pedido
     const platosMenu = document.querySelectorAll('.plato_menu');
     platosMenu.forEach(plato => {
@@ -234,8 +231,4 @@ document.addEventListener("DOMContentLoaded", function () {
     botonIrPaso1.addEventListener("click", irSeleccionar);
     botonIrPaso2.addEventListener("click", irRevisar);
     botonIrPaso3.addEventListener("click", irEstado);
-
-
-
-
 });
