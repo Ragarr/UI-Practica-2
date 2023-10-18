@@ -195,7 +195,22 @@ function actualizar_lista_pedido() {
         </div>`;
         lista_pedido.innerHTML += platoHTML;
     }
+    actualizar_total_pedido();
 }
+function actualizar_total_pedido() {
+    const total_pedido = document.getElementById("precio_total");
+    var total = 0;
+    for (i = 0; i < contenido_pedido.length; i++) {
+        var plato = contenido_pedido[i];
+        var precioTexto = plato.precio;
+        var precioNumero = parseFloat(precioTexto.replace('$', ''));
+        var cantidad = plato.cantidad;
+        console.log(precioNumero, cantidad);
+        total += precioNumero * cantidad;
+    }
+    total_pedido.innerText = total;
+}
+
 
 function irEstado() {
     const Paso2 = document.getElementById("revision_pedido");
