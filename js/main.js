@@ -2,8 +2,15 @@
 var current_order_step = 0; // Paso actual del pedido
 var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
-var contenido_pedido = {}; // Contenido del pedido nombre_plato: cantidad
+var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
 
+class Plato{
+    constructor (nombre, precio, cantidad){
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+}
 
 // REGISTRO
 function openRegPopup() {
@@ -73,26 +80,47 @@ function resetProductos() {
         var contador = plato.querySelector('.contador');
         contador.innerText = "0";
     });
-    contenido_pedido = {};
+    contenido_pedido = [];
     actualizarContadorCarrito(); // Restablecer el contador del carrito
 }
 // botones de seleccion del pedido
 function añadir_producto(event) {
-    if (!contenido_pedido[event.target.parentNode.id]) {
-        contenido_pedido[event.target.parentNode.id] = Number(0);
-    }
-    contenido_pedido[event.target.parentNode.id] += 1;
+    // añadir producto y cantidad al diccionario
     var contador = event.target.parentNode.querySelector('.contador');
+    var platoMenu = event.target.closest('.plato_menu');
+    var nombre_plato = platoMenu.querySelector('.nombre_plato').innerText;
+    var precio_plato = platoMenu.querySelector('.precio').innerText;
+    var cantidad = parseInt(contador.innerText);
+
+    // find the index of the element
+    var index = contenido_pedido.findIndex(plato => plato.nombre === nombre_plato);
+
+    if (index == -1) {
+        contenido_pedido.push(new Plato(nombre_plato, precio_plato, ++cantidad));
+    }
+    else {
+        contenido_pedido[index].cantidad += 1;
+    }
+    
     contador.innerText = parseInt(contador.innerText) + 1;
     actualizarContadorCarrito();
 }
 function quitar_producto(event) {
     var contador = event.target.parentNode.querySelector('.contador');
-    if (!contenido_pedido[event.target.parentNode.id]) {
-        contenido_pedido[event.target.parentNode.id] = Number(0);
+    var platoMenu = event.target.closest('.plato_menu');
+    var nombre_plato = platoMenu.querySelector('.nombre_plato').innerText;
+    
+    // find the index of the element
+    var index = contenido_pedido.findIndex(plato => plato.nombre === nombre_plato);
+    if (index == -1) {
+        return; // No se ha encontrado el elemento
     }
-    else if (contenido_pedido[event.target.parentNode.id] > 0) {
-        contenido_pedido[event.target.parentNode.id] -= 1;
+    if (contenido_pedido[index].cantidad <= 1) {
+        contenido_pedido.splice(index, 1);
+        contador.innerText = "0";
+    }
+    else {
+        contenido_pedido[index].cantidad -= 1;
         contador.innerText = parseInt(contador.innerText) - 1;
     }
     actualizarContadorCarrito();
@@ -101,11 +129,9 @@ function quitar_producto(event) {
 function actualizarContadorCarrito() {
     var carrito = document.getElementById("carrito");
     var contador = 0;
-    for (const [nombre_plato, cantidad] of Object.entries(contenido_pedido)) {
-
-        contador += cantidad;
+    for (var i = 0; i < contenido_pedido.length; i++) {
+        contador += contenido_pedido[i].cantidad;
     }
-
     carrito.innerText = contador;
 }
 
@@ -152,7 +178,25 @@ function irRevisar() {
     if (current_order_step == 1) {
         current_order_step = 2; // Paso actual del pedido
     }
+    actualizar_lista_pedido();
 }
+
+function actualizar_lista_pedido() {
+    const lista_pedido = document.getElementById("lista_pedido");
+    for (i = 0; i < contenido_pedido.length; i++) {
+        var plato = contenido_pedido[i];
+        var nombre = plato.nombre;
+        var precio = plato.precio;
+        var cantidad = plato.cantidad;
+        var platoHTML = `
+        <div class="plato_menu">
+            <p class="nombre_plato">${nombre}</p>
+            <p class="precio">${precio} - x${cantidad}</p>
+        </div>`;
+        lista_pedido.innerHTML += platoHTML;
+    }
+}
+
 function irEstado() {
     const Paso2 = document.getElementById("revision_pedido");
     const Paso3 = document.getElementById("estado_pedido");

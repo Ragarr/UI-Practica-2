@@ -703,6 +703,13 @@ ul.breadcrumb li a:hover {
     flex-direction: column
 }
 
+#lista_pedido{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /*------------PASO 3----------------------------*/
