@@ -247,6 +247,12 @@ function irEstadoBc() {
     irEstado();
 }
 
+function cancelarPedido() {
+    resetProductos();
+    current_order_step = 0;
+    irPaso1();
+    closePedidoPopup();
+}
 
 function updateTimer() {
     
@@ -318,4 +324,9 @@ document.addEventListener("DOMContentLoaded", function () {
     botonIrPaso1.addEventListener("click", irSeleccionar);
     botonIrPaso2.addEventListener("click", irRevisar);
     botonIrPaso3.addEventListener("click", irEstado);
+
+    // boton cancelar
+    const botonCancelar = document.querySelectorAll(".btn_cancelar");
+    botonCancelar.forEach(boton => {boton.addEventListener("click", cancelarPedido);});
+
 });
