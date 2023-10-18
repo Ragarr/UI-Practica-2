@@ -717,9 +717,6 @@ ul.breadcrumb li a:hover {
     justify-content: center;
     align-items: center;
 }
-#precio_total::before{
-    content: 'Total: $';
-}
 
 
 /*------------PASO 3----------------------------*/

@@ -139,6 +139,7 @@ function actualizarContadorCarrito() {
 // ir al paso 1
 function irSeleccionar() {
     if (current_order_step != 2) {
+        alert("No puedes editar un pedido ya realizado");
         return; // No se puede volver al paso 1 si no se ha pasado por el paso 2
     }
     const Paso1 = document.getElementById("seleccionar_productos");
@@ -173,7 +174,9 @@ function irRevisar() {
     Paso2.style.visibility = "visible";
     Paso2.style.display = "flex";
     miga_paso_2.style.color = "#01447e";
-    miga_paso_3.style.color = "#b3bec9";
+    if (current_order_step != 3) {
+        miga_paso_3.style.color = "#b3bec9";
+    }
     miga_paso_1.style.color = "#01447e";
     if (current_order_step == 1) {
         current_order_step = 2; // Paso actual del pedido
@@ -207,7 +210,7 @@ function actualizar_total_pedido() {
         console.log(precioNumero, cantidad);
         total += precioNumero * cantidad;
     }
-    total_pedido.innerText = total;
+    total_pedido.innerText = "Total: $" + total.toFixed(2);
 }
 
 // ir al paso 3
@@ -224,12 +227,22 @@ function irEstado() {
     Paso3.style.display = "flex";
     miga_paso_2.style.color = "#01447e";
     miga_paso_3.style.color = "#01447e";
-    miga_paso_1.style.color = "#01447e";
     current_order_step = 3; // Paso actual del pedido
     if (!interval) {
         interval = setInterval(updateTimer, 1000);
     }
+    miga_paso_2.innerText = "Revisar pedido";
+    miga_paso_1.style.textDecoration = "line-through";
+    miga_paso_1.style.color = "#b3bec9";
 }
+
+function irEstadoBc() {
+    if (current_order_step != 3) {
+        return; // No se puede ir al paso 3 si no se ha pagado ya
+    }
+    irEstado();
+}
+
 
 function updateTimer() {
     
@@ -288,9 +301,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // botones de navegación entre pasos
     const bc_revisar = document.getElementById("bc_revisar");
     const bc_seleccionar = document.getElementById("bc_seleccionar");
+    const bc_estado = document.getElementById("bc_estado");
 
     bc_revisar.addEventListener("click", irRevisar);
     bc_seleccionar.addEventListener("click", irSeleccionar);
+    bc_estado.addEventListener("click", irEstadoBc);
 
     const botonIrPaso1 = document.getElementById("btn_ir_paso_1");
     const botonIrPaso2 = document.getElementById("btn_ir_paso_2");
