@@ -78,10 +78,12 @@ function resetProductos() {
     try{
         platosMenu.forEach(plato => {
             var contador = plato.querySelector('.contador');
-            contador.innerText = "0";
+            if (contador){
+                contador.innerText = "0";
+            }
         });
-    }catch{
-        console.log("No se ha podido restablecer el contador de los productos");
+    }catch (error){
+        console.log("No se ha podido restablecer el contador de los productos: " + error);
     }
     contenido_pedido = [];
     actualizarContadorCarrito(); // Restablecer el contador del carrito
@@ -141,7 +143,7 @@ function actualizarContadorCarrito() {
 // funciones de navegación en los pasos del pedido
 // ir al paso 1
 function irSeleccionar() {
-    if (current_order_step != 2) {
+    if (current_order_step == 3) {
         alert("No puedes editar un pedido ya realizado");
         return; // No se puede volver al paso 1 si no se ha pasado por el paso 2
     }
@@ -248,9 +250,10 @@ function irEstadoBc() {
 }
 
 function cancelarPedido() {
-    resetProductos();
+    console.log("cancelar pedido");
     current_order_step = 0;
-    irPaso1();
+    resetProductos();
+    irSeleccionar();
     closePedidoPopup();
 }
 
