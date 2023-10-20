@@ -4,6 +4,8 @@ var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
 var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
 
+
+
 class Plato{
     constructor (nombre, precio, cantidad){
         this.nombre = nombre;
@@ -24,8 +26,6 @@ function closeRegPopup() {
     reg_popup.style.display = "none";
     document.body.style.overflow = "auto";
     const form = reg_popup.querySelector("form");
-    alert("¿Seguro que desea cancelar la operación?");
-    // O redirige a otra página:
     window.location.href = "index.html";
     form.reset();
 }
@@ -57,6 +57,43 @@ function checkDNI(event){
              event.target.setCustomValidity(""); // La entrada es válida
          }
      }
+}
+
+class User{
+    constructor (dni, nombre, telf, email){
+        this.dni = dni;
+        this.nombre = nombre;
+        this.telf = telf;
+        this.email = email;
+    }
+}
+
+
+function register(event){
+    // se acciona cuando se pulsa submit en el formulario de registro
+    event.preventDefault();
+    const dni = document.getElementById("dni").value;
+    const nombre = document.getElementById("nom_ap").value;
+    const telf = document.getElementById("telf").value;
+    const email = document.getElementById("email").value;
+    
+    var user = new User(dni, nombre, telf, email);
+    console.log(user);
+    
+    // comprobar si el usuario ya existe
+    var users = JSON.parse(localStorage.getItem("users"));
+    if (users == null){
+        users = [];
+    }
+    var index = users.findIndex(user => user.dni === dni);
+    if (index != -1){
+        alert("El usuario ya existe");
+        return;
+    }
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    closeRegPopup();
+    alert("Usuario registrado correctamente");
 }
 
 // RELIZAR PEDIDO
@@ -334,4 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonFinalizar = document.getElementById("btn_finalizar");
     botonFinalizar.addEventListener("click", closePedidoPopup);
 
+    // submit registro
+    const botonSubmit = document.getElementById("submit_reg");
+    botonSubmit.addEventListener("click", register);
 });
