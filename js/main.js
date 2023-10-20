@@ -331,5 +331,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // boton cancelar
     const botonCancelar = document.querySelectorAll(".btn_cancelar");
     botonCancelar.forEach(boton => {boton.addEventListener("click", cancelarPedido);});
+    const botonFinalizar = document.getElementById("btn_finalizar");
+    botonFinalizar.addEventListener("click", closePedidoPopup);
+
 
 });
