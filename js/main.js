@@ -334,5 +334,4 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonFinalizar = document.getElementById("btn_finalizar");
     botonFinalizar.addEventListener("click", closePedidoPopup);
 
-
 });
