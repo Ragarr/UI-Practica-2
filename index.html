@@ -515,39 +515,8 @@
     <section class="page" id="page4">
 
         <div class="col_texto">
-            <p>En el vibrante mundo de la gastronomía mexicana, 
-                El Camino emerge como un faro deslumbrante de 
-                autenticidad y creatividad. Este restaurante es 
-                mucho más que un lugar para comer; es un portal 
-                mágico que te lleva de viaje a través de los 
-                sabores, colores y aromas de México. 
-                Cada plato en nuestro menú es como una página 
-                de un cuento épico, donde las tradiciones se 
-                entrelazan con la innovación para crear una 
-                experiencia culinaria única que acaricia todos 
-                tus sentidos.
             <p>
-                Cada ingrediente es seleccionado con esmero, cada 
-                especia se mezcla con precisión y cada técnica de 
-                cocina se perfecciona para recrear con fidelidad los 
-                sabores tradicionales. Sin embargo, en nuestro afán 
-                de sorprenderte, nuestros chefs también agregan su 
-                toque personal y creativo a cada plato. Por lo tanto, 
-                mientras experimentas la nostalgia de los platos que 
-                conoces y amas, también te sorprenderás con nuevas 
-                interpretaciones que despiertan tu paladar a un mundo 
-                de posibilidades.
-            </p> 
-            <p>
-                Además, nuestro compromiso con la sostenibilidad y la 
-                calidad se refleja en cada aspecto de nuestra operación. 
-                Utilizamos ingredientes frescos y locales siempre que sea 
-                posible, y estamos comprometidos con prácticas de cocina 
-                responsables que respetan tanto la tradición como el medio 
-                ambiente.
-            </p>    
-            <p>
-                Así que, si estás anhelando una escapada gastronómica que 
+                Si estás anhelando una escapada gastronómica que 
                 te haga sentir como si estuvieras explorando las auténticas 
                 calles de México, no busques más allá de El Camino. Estamos 
                 aquí para llevarte en un viaje culinario inolvidable, donde 
@@ -555,8 +524,52 @@
                 cada plato. 
             </p> 
             <p>
-                ¡RESERVA YA!: <a href="tel:+1212-565-0000">+1 212-565-0000</a>
-            </p>        
+                <b>¡Llamanos!:</b> <a href="tel:+1212-565-0000">+1 212-565-0000</a>
+            </p>
+            <p>
+                <b>Horario:</b> Lunes a Domingo de 12:00 a 23:00
+            </p>
+            <form id = "form_reserva">
+                <h2>
+                    Hacer una reserva
+                </h2>
+                <div class = "field_reserva">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required 
+                    placeholder="Nombre Apellido1 Apellido2*" 
+                    pattern="(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$"
+                    autocomplete="name">
+                </div>
+                <div class = "field_reserva">
+                    <label for="telf">Teléfono:</label>
+                    <input type="tel" id="telf" name="telf" required
+                    placeholder="923200014" pattern="[9,8]{1}[1-8]{1}[0-9]{7}"
+                    autocomplete="tel">
+                </div>
+                <div class = "field_reserva">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                <div class = "field_reserva">
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" name="hora" required>
+                </div>
+                <div class = "field_reserva">
+                    <label for="personas">Número de personas:</label>
+                    <input type="number" id="personas" name="personas" required
+                    placeholder="1" min="1" max="10">
+                </div>
+                <div class="botones">
+                    <div id="btn_cancelar_limpiar">
+                        <input type="reset" class="btn_limpiar" value="Limpiar campos">
+                    </div>
+                    <div>
+                        <input type="submit" class="btn_enviar">
+                    </div>
+                </div>
+
+            </form>
+
         </div>
    
         <div class="col_imagenes">
