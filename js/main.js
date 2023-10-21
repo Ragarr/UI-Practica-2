@@ -3,6 +3,81 @@ var current_order_step = 0; // Paso actual del pedido
 var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
 var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
+// Inicializa los índices de carrusel
+let slideIndex = {};
+// Llama a la función de inicialización para cada carrusel
+initializeCarousel("carusel1");
+initializeCarousel("carusel2");
+initializeCarousel("carusel3");
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Mostramos las galerías
+    showSlides(1, "carusel1");
+    showSlides(1, "carusel2");
+    showSlides(1, "carusel3");
+
+    // apertura y cierre del popup de registro
+    const openRegButton = document.getElementById("open_reg");
+    const closeRegButton = document.getElementById("close_reg");
+    openRegButton.addEventListener("click", openRegPopup);
+    closeRegButton.addEventListener("click", closeRegPopup);
+    const dni_input = document.getElementById("dni");
+    dni_input.addEventListener("input", checkDNI);
+    // apertura y cierre del popup de pedido
+    const openPedidoButton = document.getElementById("open_pedido");
+    const closePedidoButton = document.getElementById("close_pedido");
+    openPedidoButton.addEventListener("click", openPedidoPopup);
+    closePedidoButton.addEventListener("click", closePedidoPopup);
+    // cierre de los popup cuando el usuario hace click fuera de ellos
+    window.addEventListener("click", function (event) {
+        if (event.target === reg_popup) {
+            closeRegPopup();
+        } else if (event.target === pedido_popup) {
+            closePedidoPopup();
+        }
+    });
+
+    // botones de seleccion del pedido
+    const platosMenu = document.querySelectorAll('.plato_menu');
+    platosMenu.forEach(plato => {
+        var botonMas = plato.querySelector('.añadir_producto');
+        var botonMenos = plato.querySelector('.eliminar_producto');
+        botonMas.addEventListener('click', añadir_producto);
+        botonMenos.addEventListener('click', quitar_producto);
+    });
+    // Limpiar el carrito
+    const limpiarCarrito = document.getElementById("limpiar_selecciones");
+    limpiarCarrito.addEventListener("click", resetProductos);
+
+    // botones de navegación entre pasos
+    const bc_revisar = document.getElementById("bc_revisar");
+    const bc_seleccionar = document.getElementById("bc_seleccionar");
+    const bc_estado = document.getElementById("bc_estado");
+
+    bc_revisar.addEventListener("click", irRevisar);
+    bc_seleccionar.addEventListener("click", irSeleccionar);
+    bc_estado.addEventListener("click", irEstadoBc);
+
+    const botonIrPaso1 = document.getElementById("btn_ir_paso_1");
+    const botonIrPaso2 = document.getElementById("btn_ir_paso_2");
+    const botonIrPaso3 = document.getElementById("btn_ir_paso_3");
+
+    botonIrPaso1.addEventListener("click", irSeleccionar);
+    botonIrPaso2.addEventListener("click", irRevisar);
+    botonIrPaso3.addEventListener("click", irEstado);
+
+    // boton cancelar
+    const botonCancelar = document.querySelectorAll(".btn_cancelar");
+    botonCancelar.forEach(boton => {boton.addEventListener("click", cancelarPedido);});
+    const botonFinalizar = document.getElementById("btn_finalizar");
+    botonFinalizar.addEventListener("click", closePedidoPopup);
+
+    // submit registro
+    const botonSubmit = document.getElementById("submit_reg");
+    botonSubmit.addEventListener("click", register);
+});
 
 
 
@@ -30,9 +105,8 @@ function closeRegPopup() {
     form.reset();
 }
 
-// event must be a input event 
 function checkDNI(event){
-     // Patrón quew debe seguir un DNI
+     // Patrón que debe seguir un DNI
      const DNI_pattern = /^[0-9]{8}[A-Z]{1}$/
      // Letras que toma el DNI dependiendo del resto
      const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 
@@ -318,65 +392,74 @@ function updateTimer() {
 }
 
 
+// Carrusel de imagenes
 
-document.addEventListener("DOMContentLoaded", function () {
-    // apertura y cierre del popup de registro
-    const openRegButton = document.getElementById("open_reg");
-    const closeRegButton = document.getElementById("close_reg");
-    openRegButton.addEventListener("click", openRegPopup);
-    closeRegButton.addEventListener("click", closeRegPopup);
-    const dni_input = document.getElementById("dni");
-    dni_input.addEventListener("input", checkDNI);
-    // apertura y cierre del popup de pedido
-    const openPedidoButton = document.getElementById("open_pedido");
-    const closePedidoButton = document.getElementById("close_pedido");
-    openPedidoButton.addEventListener("click", openPedidoPopup);
-    closePedidoButton.addEventListener("click", closePedidoPopup);
-    // cierre de los popup cuando el usuario hace click fuera de ellos
-    window.addEventListener("click", function (event) {
-        if (event.target === reg_popup) {
-            closeRegPopup();
-        } else if (event.target === pedido_popup) {
-            closePedidoPopup();
-        }
-    });
+// Agrega una función para inicializar los índices de cada carrusel
+function initializeCarousel(carouselId) {
+    slideIndex[carouselId] = 1;
+}
+function plusSlides(n, carouselId) {
+showSlides(slideIndex[carouselId] += n, carouselId);
+}
 
-    // botones de seleccion del pedido
-    const platosMenu = document.querySelectorAll('.plato_menu');
-    platosMenu.forEach(plato => {
-        var botonMas = plato.querySelector('.añadir_producto');
-        var botonMenos = plato.querySelector('.eliminar_producto');
-        botonMas.addEventListener('click', añadir_producto);
-        botonMenos.addEventListener('click', quitar_producto);
-    });
-    // Limpiar el carrito
-    const limpiarCarrito = document.getElementById("limpiar_selecciones");
-    limpiarCarrito.addEventListener("click", resetProductos);
+function currentSlide(n, carouselId) {
+showSlides(slideIndex[carouselId] = n, carouselId);
+}
 
-    // botones de navegación entre pasos
-    const bc_revisar = document.getElementById("bc_revisar");
-    const bc_seleccionar = document.getElementById("bc_seleccionar");
-    const bc_estado = document.getElementById("bc_estado");
+function showSlides(n, carouselId) {
+let i;
+let slides = document.getElementById(carouselId).getElementsByClassName("img_con_desc");
 
-    bc_revisar.addEventListener("click", irRevisar);
-    bc_seleccionar.addEventListener("click", irSeleccionar);
-    bc_estado.addEventListener("click", irEstadoBc);
+if (n > 3) {
+    slideIndex[carouselId] = 1;
+}
+if (n < 1) {
+    slideIndex[carouselId] = 3;
+}
 
-    const botonIrPaso1 = document.getElementById("btn_ir_paso_1");
-    const botonIrPaso2 = document.getElementById("btn_ir_paso_2");
-    const botonIrPaso3 = document.getElementById("btn_ir_paso_3");
+for (i = 0; i < 3; i++) {
+    slides[i].style.display = "none";
+}
+slides[slideIndex[carouselId] - 1].style.display = "block";
+}
 
-    botonIrPaso1.addEventListener("click", irSeleccionar);
-    botonIrPaso2.addEventListener("click", irRevisar);
-    botonIrPaso3.addEventListener("click", irEstado);
-
-    // boton cancelar
-    const botonCancelar = document.querySelectorAll(".btn_cancelar");
-    botonCancelar.forEach(boton => {boton.addEventListener("click", cancelarPedido);});
-    const botonFinalizar = document.getElementById("btn_finalizar");
-    botonFinalizar.addEventListener("click", closePedidoPopup);
-
-    // submit registro
-    const botonSubmit = document.getElementById("submit_reg");
-    botonSubmit.addEventListener("click", register);
-});
+function showNavigation(caruselId) {
+    // Mostrar las flechas "prev" y "next" y el número "numbertext"
+    const carusel = document.getElementById(caruselId);
+    const prevButton = carusel.querySelector('.prev');
+    const nextButton = carusel.querySelector('.next');
+    const numbertext = carusel.querySelectorAll('.numbertext');
+  
+    if (prevButton) {
+      prevButton.style.display = 'block';
+    }
+    if (nextButton) {
+      nextButton.style.display = 'block';
+    }
+    if (numbertext.length > 0) {
+      numbertext.forEach((text) => {
+        text.style.display = 'block';
+      });
+    }
+  }
+  
+  function hideNavigation(caruselId) {
+    // Ocultar las flechas "prev" y "next" y el número "numbertext"
+    const carusel = document.getElementById(caruselId);
+    const prevButton = carusel.querySelector('.prev');
+    const nextButton = carusel.querySelector('.next');
+    const numbertext = carusel.querySelectorAll('.numbertext');
+  
+    if (prevButton) {
+      prevButton.style.display = 'none';
+    }
+    if (nextButton) {
+      nextButton.style.display = 'none';
+    }
+    if (numbertext.length > 0) {
+      numbertext.forEach((text) => {
+        text.style.display = 'none';
+      });
+    }
+  }
+  

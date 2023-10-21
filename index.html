@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurante El Camino</title>
     <link rel="shortcut icon" href="media/img/logo.ico">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head> 
 
 
@@ -364,29 +365,98 @@
         <div class="col_imagenes">
             <h1>Menú</h1>           
             <div class="galeria">
-                <div class="img_con_desc">
-                    <div class="image-wraper">
-                        <a target="_blank" href="media/img/img1.jpeg">
-                            <img src="media/img/img1.jpeg" alt="Tacos al Pastor">
-                        </a>    
+                <div class="carusel" id="carusel1" onmouseenter="showNavigation('carusel1')" onmouseleave="hideNavigation('carusel1')">
+                    <div class="img_con_desc">
+                        <div class="image-wraper">
+                            <a target="_blank" href="media/img/img1_1.jpeg">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="media/img/img1_1.jpeg" alt="Tacos al Pastor">
+                            </a>    
+                        </div>
+                        <div class="desc">Tacos al Pastor</div>
                     </div>
-                    <div class="desc">Tacos al Pastor</div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img1_2.jpg">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="media/img/img1_2.jpg" alt="Nachos con guacamole">
+                                </a>
+                            </div>
+                        <div class="desc">Nachos con guacamole</div>
+                    </div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img1_3.jpg">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="media/img/img1_3.jpg" alt="Tamales rellenos de pollo">
+                                </a>
+                            </div>
+                        <div class="desc">Tamales rellenos de pollo</div>
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1, 'carusel1')">❮</a>
+                    <a class="next" onclick="plusSlides(1, 'carusel1')">❯</a>
                 </div>
-                <div class="img_con_desc">
+                <div class="carusel" id="carusel2" onmouseenter="showNavigation('carusel2')" onmouseleave="hideNavigation('carusel2')">
+                    <div class="img_con_desc">
                         <div class="image-wraper">
-                            <a target="_blank" href="media/img/img2.jpeg">
-                                <img src="media/img/img2.jpeg" alt="Tlayudas Oaxaqueñas">
-                            </a>
+                            <a target="_blank" href="media/img/img2_1.jpeg">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="media/img/img2_1.jpeg" alt="Tlayudas Oaxaqueñas">
+                            </a>    
                         </div>
-                    <div class="desc">Tlayudas Oaxaqueñas</div>
+                        <div class="desc">Tlayudas Oaxaqueñas</div>
+                    </div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img2_2.jpg">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="media/img/img2_2.jpg" alt="Pozole">
+                                </a>
+                            </div>
+                        <div class="desc">Pozole</div>
+                    </div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img2_3.jpg">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="media/img/img2_3.jpg" alt="Camarones a la Diabla">
+                                </a>
+                            </div>
+                        <div class="desc">Camarones a la Diabla</div>
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1, 'carusel2')">❮</a>
+                    <a class="next" onclick="plusSlides(1, 'carusel2')">❯</a>
                 </div>
-                <div class="img_con_desc">
+                <div class="carusel" id="carusel3" onmouseenter="showNavigation('carusel3')" onmouseleave="hideNavigation('carusel3')">
+                    <div class="img_con_desc">
                         <div class="image-wraper">
-                            <a target="_blank" href="media/img/img3.jpeg">
-                                <img src="media/img/img3.jpeg" alt="Chiles Rellenos">
-                            </a>
+                            <a target="_blank" href="media/img/img3_1.jpg">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="media/img/img3_1.jpg" alt="Flan casero">
+                            </a>    
                         </div>
-                    <div class="desc">Chiles Rellenos</div>
+                        <div class="desc">Flan casero</div>
+                    </div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img3_2.jpg">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="media/img/img3_2.jpg" alt="Churros con chocolate caliente">
+                                </a>
+                            </div>
+                        <div class="desc">Churros con chocolate caliente</div>
+                    </div>
+                    <div class="img_con_desc">
+                            <div class="image-wraper">
+                                <a target="_blank" href="media/img/img3_3.jpg">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="media/img/img3_3.jpg" alt="Pastel de Tres Leches">
+                                </a>
+                            </div>
+                        <div class="desc">Pastel de Tres Leches</div>
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1, 'carusel3')">❮</a>
+                    <a class="next" onclick="plusSlides(1, 'carusel3')">❯</a>
                 </div>
             </div>
         </div>
@@ -525,7 +595,7 @@
                 cada plato. 
             </p> 
             <p>
-                <b>¡Llamanos!:</b> <a href="tel:+1212-565-0000">+1 212-565-0000</a>
+                <b>¡Llámanos!:</b> <a href="tel:+1212-565-0000">+1 212-565-0000</a>
             </p>
             <p>
                 <b>Horario:</b> Lunes a Domingo de 12:00 a 23:00
@@ -558,7 +628,7 @@
                 <div class = "field_reserva">
                     <label for="personas">Número de personas:</label>
                     <input type="number" id="personas" name="personas" required
-                    placeholder="1" min="1" max="10">
+                    placeholder="10 máximo" min="1" max="10">
                 </div>
                 <div class="botones">
                     <div id="btn_cancelar_limpiar">
