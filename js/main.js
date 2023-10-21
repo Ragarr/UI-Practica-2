@@ -271,6 +271,8 @@ function irEstado() {
     miga_paso_2.style.color = "#01447e";
     miga_paso_3.style.color = "#01447e";
     current_order_step = 3; // Paso actual del pedido
+    // Iniciamos el contador inmediatamente para evitar el delay
+    updateTimer();
     if (!interval) {
         interval = setInterval(updateTimer, 1000);
     }
@@ -309,7 +311,10 @@ function updateTimer() {
     // actualizar barra de progreso
     const barra_progreso = document.getElementById("barra_progreso");
     const porcentaje = (remainingTime / 600) * 100;
-    barra_progreso.style.width = porcentaje + "%";
+    // Usamos requestAnimationFrame para sincronizar las actualizaciones
+    requestAnimationFrame(() => {
+        barra_progreso.style.width = porcentaje + "%";
+    });
 }
 
 
