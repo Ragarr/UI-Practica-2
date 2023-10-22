@@ -90,7 +90,13 @@ document.addEventListener("DOMContentLoaded", function () {
         animateScroll(page4);
     });
 
+    // Menú de hamburguesa
+    const dropdownTitle = document.querySelector('.menu_de_hamburguesa .title');
+    const dropdownOptions = document.querySelectorAll('.menu_de_hamburguesa .option');
 
+    //vincula listeners a estos elementos
+    dropdownTitle.addEventListener('click', toggleMenuDisplay);
+    dropdownOptions.forEach(option => option.addEventListener('click',handleOptionSelected));
 });
 
 
@@ -521,4 +527,66 @@ function animateScroll(page) {
         // console.log("Posicion de " + page.id + ": " + getPositionOfPage(page));
         $(page).animate({ opacity: 0 }, 500);
     }
+}
+
+
+// Desplegar menu de hamburguesa
+function toggleClass(elem,className){
+	if (elem.className.indexOf(className) !== -1){
+		elem.className = elem.className.replace(className,'');     
+	}
+	else{
+		elem.className = elem.className.replace(/\s+/g,' ') + 	' ' + className;
+	}
+	
+	return elem;
+}
+
+function toggleDisplay(elem){
+	const curDisplayStyle = elem.style.display;			
+				
+	if (curDisplayStyle === 'none' || curDisplayStyle === ''){
+		elem.style.display = 'block';
+	}
+	else{
+		elem.style.display = 'none';
+	}
+}
+
+
+function toggleMenuDisplay(e){
+	const dropdown = e.currentTarget.parentNode;
+	const menu = dropdown.querySelector('.opciones_menu');
+	const icon = dropdown.querySelector('.fa-angle-right');
+
+	toggleClass(menu,'hide');
+	toggleClass(icon,'rotate-90');
+}
+
+function handleOptionSelected(e){
+	toggleClass(e.target.parentNode, 'hide');			
+	const icon = document.querySelector('.menu_de_hamburguesa .title .fa');
+
+    // Simulamos un click en el menú de ordenador para poder
+    // reutilizar el comportamiento
+    if(e.target.textContent == "Inicio"){
+        btn_inicio.click();
+    }
+    else if(e.target.textContent == "Menú"){
+        btn_menu.click();
+    }
+	else if(e.target.textContent == "Nuestros chefs"){
+        btn_chefs.click();
+    }
+    else if(e.target.textContent == "Sobre nosotros"){
+        btn_nosotros.click();
+    }
+    else if(e.target.textContent == "Registro"){
+        open_reg.click();
+    }
+    else if(e.target.textContent == "Realizar pedido"){
+        open_pedido.click();
+    }
+	//setTimeout se usa para que la transición se muestre correctamente
+	setTimeout(() => toggleClass(icon,'rotate-90',0));
 }

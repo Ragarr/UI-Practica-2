@@ -31,18 +31,122 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     }
 
     #page1 {
-        max-height: 30vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #page1 {
+        max-height: 45vh;
     }
 
     #page1 #col_izq1{
         max-width: 100%;
+        order: 2;
+    }
+
+    #page1 #logo{
+        visibility: hidden;
+    }
+
+    #page1 #col_opciones{
+        display: block;
+        width: 100%;
+    }
+
+    #col_opciones #logo2{
+        float: left;
+        position: absolute;
+        width: 100%;
+        max-width: 20%;
+        margin-left: 3%;
+    }
+
+    #page1 .menu_de_hamburguesa{
+        width: fit-content;
+        display: flex;
+        float: right;
+        order: 1;
+        font-family: 'carlmarx';
+        font-size: 4vw;
+        margin-right: 1.5%;
+        color:#ce5b18;
+        border: 0.1em solid #ce5b18;
+        border-radius: 20px;
+    }
+
+    .hide {
+        max-height: 0 !important;
+    }
+
+    .menu_de_hamburguesa .title{
+        margin: .3em .3em .3em .3em;	
+        width: 100%;
+    }
+    
+    .menu_de_hamburguesa .title .fa-angle-right{
+        float: right;
+        margin-right: .7em;
+        transition: transform .3s;
+    }
+    
+    .menu_de_hamburguesa .opciones_menu{
+        transition: max-height .5s ease-out;
+        max-height: 20em;
+        overflow: hidden;
+    }
+    
+    .menu_de_hamburguesa .opciones_menu .option{
+        margin: .3em .3em .3em .3em;
+        margin-top: 0.3em;
+        font-size: 3vw;
+        color:#683415;
+    }
+    
+    .menu_de_hamburguesa .opciones_menu .option:hover{
+        background: rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    
+    .pointerCursor:hover{
+        cursor: pointer;
+    }
+    
+    .rotate-90{
+        transform: rotate(90deg);
+    }
+
+    #menu_icon_container{
+        width: fit-content;
+        margin: 1%;
+        margin-top: 2%;
+    }
+    
+    #img_icon_menu {
+        width: 3.5vw;
+        max-width: 100%;
+        cursor: pointer;
+    }
+
+    #img_icon_menu:hover {
+        border-radius: 10px;
+        background-color:#ebc0a8;
+    }
+
+    #page1 #col_der1 #btn_inicio,
+    #page1 #col_der1 #btn_menu,
+    #page1 #col_der1 #btn_chefs,
+    #page1 #col_der1 #btn_nosotros,
+    #page1 #col_der1 #open_reg,
+    #page1 #col_der1 #open_pedido
+    {
+       display: none;
     }
 
     #page1 #col_der1{
-        display: none;
+        margin: -1%;
     }
-  
-    #page2 {
+    
+    .page {
         display: flex;
         flex-direction: column;
     }
@@ -71,10 +175,6 @@ AUTORES: Natalia Rodríguez Navarro 100471976
         margin-left: 2%;
     }
 
-    #page3 {
-        display: flex;
-        flex-direction: column;
-    }
 
     #page3 .col_texto{
         width: fit-content;
@@ -98,10 +198,6 @@ AUTORES: Natalia Rodríguez Navarro 100471976
         height: 25vh;
     }
 
-    #page4 {
-        display: flex;
-        flex-direction: column;
-    }
 
     #page4 .col_texto{
         width: fit-content;
@@ -182,6 +278,11 @@ h2 {
     text-decoration: underline;
 }
 
+h3{
+    display: none;
+    visibility: hidden;
+}
+
 p {
     font-family: carlmarx;
     font-size: min(175%, 2.5vw);
@@ -219,6 +320,10 @@ button{
     margin: 6px;
     padding: 3px;
     display: flex;
+}
+
+#col_opciones{
+    display: none;
 }
 
 /*PÁGINA 1 - COLUMNA IZQUIERDA - VÍDEO Y LOGO*/
