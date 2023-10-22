@@ -23,13 +23,13 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     }
 }
 
-/*TABLET*/
+/*TABLET Y MÓVIL*/
 @media screen and (max-width: 768px) {
     body {    
         padding-right: 5%;
         padding-left: 5%;
     }
-    
+
     #page1 {
         max-height: 50vh;
     }
@@ -37,22 +37,105 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     #footer_container {
         height: 10vh;
     }
+
+    #page2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #page2 .col_texto{
+        width: fit-content;
+        order: 2;
+    }
+
+    #page2 .col_imagenes{
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        order: 1;
+    }
+
+    #page2 .galeria{
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #page2 .carrusel{
+        width: 100%;
+        margin-left: 2%;
+    }
+
+    #page3 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #page3 .col_texto{
+        width: fit-content;
+    }
+
+    #page3 .col_imagenes{
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #page3 .galeria{
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        margin-left: 1%;
+    }
+
+    #page3 .image-wraper{
+        height: 25vh;
+    }
+
+    #page4 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #page4 .col_texto{
+        width: fit-content;
+        order: 2;
+    }
+
+    #page4 .col_imagenes{
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        order: 1;
+    }
+
+    #page4 .carrusel{
+        margin-left: 2%;
+    }
+
+    #page4 .image-wraper{
+        height: 25vh;
+    }
+
+    #page4 .gmap {
+        margin-left: 2%;
+        margin-bottom: 1%;
+    }
+
+    #page4 .gmap iframe{
+        height: 25vh;
+        
+    }
 }
 
 /*MÓVIL*/
 @media screen and (max-width: 600px) {
-
     body {
         padding-right: 0px;
         padding-left: 0px;
-    }
-   
-    #page1 {
-        max-height: 70vh;
-    }
-
-    #footer_container {
-        height: 11vh;
     }
 }
 
@@ -83,6 +166,7 @@ h1 {
     padding: 10%;
     display: flex;
     justify-content: center;
+    align-content: center;
     flex-wrap: wrap;
 }
 
