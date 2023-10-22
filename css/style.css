@@ -232,12 +232,11 @@ button{
     position: relative;
 }
 
-.carusel {
+.carrusel {
     height: 100%;
     width: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: block;
+    align-items: center;
     position: relative;
 }
 
@@ -247,6 +246,7 @@ button{
     align-items: center;
 }
 
+
 .desc {
     font-family: carlmarx;
     font-size: min(150%,2.5vw);
@@ -255,11 +255,22 @@ button{
 }
     
 .image-wraper {
-    max-height: 33.3333vh;
+    max-height: 36vh;
     width: 100%;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#page3 .image-wraper{
+    max-height: 70vh;
+}
+
+#page4 .image-wraper{
+    max-height: 50vh;
 }
 
 .image-wraper a {
@@ -272,7 +283,6 @@ button{
 .image-wraper img {
     width: 100%;
     border-radius: 20px;
-    vertical-align: middle;
 }
 
 .prev,
@@ -305,7 +315,7 @@ button{
   transform: scale(1.1);
 }
 
-.carusel a:hover{
+.carrusel a:hover{
     text-decoration: none;
 }
 

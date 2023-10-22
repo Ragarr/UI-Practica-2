@@ -5,18 +5,20 @@ var interval; // Intervalo de tiempo para actualizar el temporizador
 var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
 // Inicializa los índices de carrusel
 let slideIndex = {};
+let interval_carrusel = {};
+const startTime = {};
 // Llama a la función de inicialización para cada carrusel
-initializeCarousel("carusel1");
-initializeCarousel("carusel2");
-initializeCarousel("carusel3");
-
+var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel5", "carrusel_ficticio"];
+for (var i = 0; i < carruselIds.length; i++) {
+    initializecarrusel(carruselIds[i]);
+  }
 
 
 document.addEventListener("DOMContentLoaded", function () {
     // Mostramos las galerías
-    showSlides(1, "carusel1");
-    showSlides(1, "carusel2");
-    showSlides(1, "carusel3");
+    for (var i = 0; i < carruselIds.length; i++) {
+        showSlides(1, carruselIds[i]);
+      }
 
     // apertura y cierre del popup de registro
     const openRegButton = document.getElementById("open_reg");
@@ -395,40 +397,66 @@ function updateTimer() {
 // Carrusel de imagenes
 
 // Agrega una función para inicializar los índices de cada carrusel
-function initializeCarousel(carouselId) {
-    slideIndex[carouselId] = 1;
+function initializecarrusel(carruselId) {
+    slideIndex[carruselId] = 1;
+    // Iniciamos el carrusel automático
+    interval_carrusel[carruselId] = startAutocarrusel(carruselId);
 }
-function plusSlides(n, carouselId) {
-showSlides(slideIndex[carouselId] += n, carouselId);
-}
-
-function currentSlide(n, carouselId) {
-showSlides(slideIndex[carouselId] = n, carouselId);
+function plusSlides(n, carruselId) {
+    showSlides(slideIndex[carruselId] += n, carruselId);
 }
 
-function showSlides(n, carouselId) {
-let i;
-let slides = document.getElementById(carouselId).getElementsByClassName("img_con_desc");
-
-if (n > 3) {
-    slideIndex[carouselId] = 1;
-}
-if (n < 1) {
-    slideIndex[carouselId] = 3;
+function currentSlide(n, carruselId) {
+    showSlides(slideIndex[carruselId] = n, carruselId);
 }
 
-for (i = 0; i < 3; i++) {
-    slides[i].style.display = "none";
-}
-slides[slideIndex[carouselId] - 1].style.display = "block";
+function showSlides(n, carruselId) {
+    let i;
+    let slides = document.getElementById(carruselId).getElementsByClassName("img_con_desc");
+
+    if (n > 3) {
+        slideIndex[carruselId] = 1;
+    }
+    if (n < 1) {
+        slideIndex[carruselId] = 3;
+    }
+
+    for (i = 0; i < 3; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex[carruselId] - 1].style.display = "block";
+    
 }
 
-function showNavigation(caruselId) {
+
+function startAutocarrusel(carruselId) {
+    // Devuelve el identificador del temporizador
+    return setInterval(function () {
+        plusSlides(1, carruselId);
+        startTime[carruselId] = Date.now();
+    }, 3000); // Cambia cada wait = 3000ms = 3 segundos.
+}
+
+function pauseAutocarrusel(carruselId){
+    clearInterval(interval_carrusel[carruselId])
+}
+
+function resumeAutocarrusel(carruselId){
+    // Los coordinamos haciendo que se esperen entre ellos
+    wait = 3000 - (Date.now() - startTime["carrusel5"]);
+    setTimeout(function(){
+        interval_carrusel[carruselId] = startAutocarrusel(carruselId);
+    }, wait)     
+}
+
+function showNavigation(carruselId) {
+    // Pausamos el desplaamiento automático
+    pauseAutocarrusel(carruselId)
     // Mostrar las flechas "prev" y "next" y el número "numbertext"
-    const carusel = document.getElementById(caruselId);
-    const prevButton = carusel.querySelector('.prev');
-    const nextButton = carusel.querySelector('.next');
-    const numbertext = carusel.querySelectorAll('.numbertext');
+    const carrusel = document.getElementById(carruselId);
+    const prevButton = carrusel.querySelector('.prev');
+    const nextButton = carrusel.querySelector('.next');
+    const numbertext = carrusel.querySelectorAll('.numbertext');
   
     if (prevButton) {
       prevButton.style.display = 'block';
@@ -443,12 +471,12 @@ function showNavigation(caruselId) {
     }
   }
   
-  function hideNavigation(caruselId) {
+  function hideNavigation(carruselId) {
     // Ocultar las flechas "prev" y "next" y el número "numbertext"
-    const carusel = document.getElementById(caruselId);
-    const prevButton = carusel.querySelector('.prev');
-    const nextButton = carusel.querySelector('.next');
-    const numbertext = carusel.querySelectorAll('.numbertext');
+    const carrusel = document.getElementById(carruselId);
+    const prevButton = carrusel.querySelector('.prev');
+    const nextButton = carrusel.querySelector('.next');
+    const numbertext = carrusel.querySelectorAll('.numbertext');
   
     if (prevButton) {
       prevButton.style.display = 'none';
@@ -461,5 +489,8 @@ function showNavigation(caruselId) {
         text.style.display = 'none';
       });
     }
+
+    // Reanudamos el desplazamiento automático
+    resumeAutocarrusel(carruselId)
   }
   
