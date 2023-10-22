@@ -6,7 +6,6 @@ var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
 // Inicializa los índices de carrusel
 let slideIndex = {};
 let interval_carrusel = {};
-const startTime = {};
 // Llama a la función de inicialización para cada carrusel
 var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel5", "carrusel_ficticio"];
 for (var i = 0; i < carruselIds.length; i++) {
@@ -433,7 +432,7 @@ function startAutocarrusel(carruselId) {
     // Devuelve el identificador del temporizador
     return setInterval(function () {
         plusSlides(1, carruselId);
-        startTime[carruselId] = Date.now();
+        startTime = Date.now();
     }, 3000); // Cambia cada wait = 3000ms = 3 segundos.
 }
 
@@ -443,7 +442,7 @@ function pauseAutocarrusel(carruselId){
 
 function resumeAutocarrusel(carruselId){
     // Los coordinamos haciendo que se esperen entre ellos
-    wait = 3000 - (Date.now() - startTime["carrusel5"]);
+    wait = Math.max(0, 3000 - (Date.now() - startTime));
     setTimeout(function(){
         interval_carrusel[carruselId] = startAutocarrusel(carruselId);
     }, wait)     
