@@ -196,7 +196,8 @@ button{
     margin: 6px;
     padding: 3px;
     display: flex;
-    }
+    opacity: 0;
+}
 
 /*TEXTO*/
 .col_texto { 
@@ -330,7 +331,6 @@ button{
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
 }
-  
 
 /*----------------PÁGINA 2 - MAPA------------------*/
 

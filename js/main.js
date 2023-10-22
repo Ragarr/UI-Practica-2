@@ -78,6 +78,48 @@ document.addEventListener("DOMContentLoaded", function () {
     // submit registro
     const botonSubmit = document.getElementById("submit_reg");
     botonSubmit.addEventListener("click", register);
+
+    const Page = document.getElementById("page2")
+    getPositionOfPage(Page);
+
+    // Animación scroll
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const page3 = document.getElementById("page3");
+    const page4 = document.getElementById("page4");
+    animateScroll(page2);
+    window.addEventListener("scroll", function () {
+        animateScroll(page2);
+        animateScroll(page3);
+        animateScroll(page4);
+    });
+    const botonInicio = document.getElementById("btn_inicio");
+    const botonMenu = document.getElementById("btn_menu");
+    const botonChefs = document.getElementById("btn_chefs");
+    const botonNosotros = document.getElementById("btn_nosotros");
+
+    botonInicio.addEventListener("click", function () {
+        animateScroll(page1);
+    });
+    botonMenu.addEventListener("click", function () {
+        animateScroll(page1);
+        animateScroll(page2);
+    });
+    botonChefs.addEventListener("click", function () {
+        animateScroll(page1);
+        animateScroll(page2);
+        animateScroll(page3);
+    });
+    botonNosotros.addEventListener("click", function () {
+        animateScroll(page1);
+        animateScroll(page2);
+        animateScroll(page3);
+        animateScroll(page4);
+    });
+    
+
+
+
 });
 
 
@@ -424,7 +466,6 @@ function showSlides(n, carruselId) {
         slides[i].style.display = "none";
     }
     slides[slideIndex[carruselId] - 1].style.display = "block";
-    
 }
 
 
@@ -493,3 +534,20 @@ function showNavigation(carruselId) {
     resumeAutocarrusel(carruselId)
   }
   
+  
+// Animación scroll
+function getPositionOfPage(page) {
+    const position = page.getBoundingClientRect();
+    return position.top;
+}
+
+function animateScroll(page) {
+    if (getPositionOfPage(page) - window.innerHeight * 0.8 < 0 && page.style.opacity == 0) {
+        // console.log("Posicion de " + page.id + ": " + getPositionOfPage(page));
+        $(page).animate({ opacity: 1 }, 500);
+    }
+    else if (getPositionOfPage(page) - window.innerHeight * 1 > 0 && page.style.opacity == 1) {
+        // console.log("Posicion de " + page.id + ": " + getPositionOfPage(page));
+        $(page).animate({ opacity: 0 }, 500);
+    }
+}
