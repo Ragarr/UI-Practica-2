@@ -31,13 +31,17 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     }
 
     #page1 {
-        max-height: 50vh;
-    }
-  
-    #footer_container {
-        height: 10vh;
+        max-height: 30vh;
     }
 
+    #page1 #col_izq1{
+        max-width: 100%;
+    }
+
+    #page1 #col_der1{
+        display: none;
+    }
+  
     #page2 {
         display: flex;
         flex-direction: column;
