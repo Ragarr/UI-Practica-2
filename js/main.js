@@ -7,7 +7,7 @@ var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
 let slideIndex = {};
 let interval_carrusel = {};
 // Llama a la función de inicialización para cada carrusel
-var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel5", "carrusel_ficticio"];
+var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel5"];
 for (var i = 0; i < carruselIds.length; i++) {
     initializecarrusel(carruselIds[i]);
   }

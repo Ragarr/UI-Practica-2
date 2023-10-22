@@ -235,9 +235,10 @@ button{
 .carrusel {
     height: 100%;
     width: auto;
-    display: block;
+    display: flex;
     align-items: center;
     position: relative;
+    justify-content: center;
 }
 
 .img_con_desc {
