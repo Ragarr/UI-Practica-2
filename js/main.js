@@ -541,8 +541,61 @@ function cancelarPedido() {
     console.log("cancelar pedido");
     current_order_step = 0;
     resetProductos();
-    irSeleccionar();
+    resetPedidoPopup();
+    // reestablecer migas, temporizador y visibilidad de los pasos
+    const Paso1 = document.getElementById("seleccionar_productos");
+    const Paso2 = document.getElementById("revision_pedido");
+    const Paso3 = document.getElementById("estado_pedido");
+    const miga_paso_1 = document.getElementById("bc_seleccionar");
+    const miga_paso_2 = document.getElementById("bc_revisar");
+    const miga_paso_3 = document.getElementById("bc_estado");
+    const carrito = document.getElementById("carrito_container");
+    Paso1.style.visibility = "visible";
+
+    Paso1.style.display = "flex";
+    Paso2.style.visibility = "hidden";
+    Paso2.style.display = "none";
+    Paso3.style.visibility = "hidden";
+
+    Paso3.style.display = "none";
+    carrito.style.visibility = "visible";
+    carrito.style.display = "flex";
+    miga_paso_1.style.color = "#01447e";
+    miga_paso_2.style.color = "#b3bec9";
+    miga_paso_3.style.color = "#b3bec9";
+
+    miga_paso_1.style.textDecoration = "none";
+    miga_paso_2.innerText = "Revisar pedido";
+    // reestablecer el temporizador
+    clearInterval(interval);
+    remainingTime = 600;
+    interval = null;
+    const timer = document.getElementById("timer");
+    timer.textContent = "10:00";
+    const barra_progreso = document.getElementById("barra_progreso");
+    barra_progreso.style.width = "100%";
+
     closePedidoPopup();
+}
+
+function resetPedidoPopup() {
+    // reestablecer los colores de las migas de pan
+    const miga_paso_1 = document.getElementById("bc_seleccionar");
+    const miga_paso_2 = document.getElementById("bc_revisar");
+    const miga_paso_3 = document.getElementById("bc_estado");
+    miga_paso_1.style.color = "#01447e";
+    miga_paso_2.style.color = "#b3bec9";
+    miga_paso_3.style.color = "#b3bec9";
+    miga_paso_1.style.textDecoration = "none";
+    miga_paso_2.innerText = "Revisar pedido";
+    // reestablecer el temporizador
+    clearInterval(interval);
+    remainingTime = 600;
+    interval = null;
+    const timer = document.getElementById("timer");
+    timer.textContent = "10:00";
+    const barra_progreso = document.getElementById("barra_progreso");
+    barra_progreso.style.width = "100%";
 }
 
 function updateTimer() {
