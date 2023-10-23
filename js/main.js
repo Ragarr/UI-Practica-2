@@ -11,7 +11,7 @@ var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel
 for (var i = 0; i < carruselIds.length; i++) {
     initializecarrusel(carruselIds[i]);
   }
-
+current_user = null; // Usuario actual
 
 document.addEventListener("DOMContentLoaded", function () {
     // Mostramos las galerías
@@ -24,8 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeRegButton = document.getElementById("close_reg");
     openRegButton.addEventListener("click", openRegPopup);
     closeRegButton.addEventListener("click", closeRegPopup);
+
+    // input en los campos del formulario de registro
     const dni_input = document.getElementById("dni");
-    dni_input.addEventListener("input", checkDNI);
+    dni_input.addEventListener("input", dniInput);
+    const nombre_input = document.getElementById("nom_ap");
+    nombre_input.addEventListener("input", nameInput);
+    const telf_input = document.getElementById("telf");
+    telf_input.addEventListener("input", telfInput);
+    const email_input = document.getElementById("email");
+    email_input.addEventListener("input", emailInput);
+
+
     // apertura y cierre del popup de pedido
     const openPedidoButton = document.getElementById("open_pedido");
     const closePedidoButton = document.getElementById("close_pedido");
@@ -39,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             closePedidoPopup();
         }
     });
+    
 
     // botones de seleccion del pedido
     const platosMenu = document.querySelectorAll('.plato_menu');
@@ -102,6 +113,12 @@ class Plato{
         this.cantidad = cantidad;
     }
 }
+class Pedido{
+    constructor (usuario, contenido){
+        this.usuario = usuario;
+        this.contenido = contenido;
+    }
+}
 
 // REGISTRO
 function openRegPopup() {
@@ -115,37 +132,11 @@ function closeRegPopup() {
     reg_popup.style.display = "none";
     document.body.style.overflow = "auto";
     const form = reg_popup.querySelector("form");
-    window.location.href = "index.html";
     form.reset();
 }
 
-function checkDNI(event){
-     // Patrón que debe seguir un DNI
-     const DNI_pattern = /^[0-9]{8}[A-Z]{1}$/
-     // Letras que toma el DNI dependiendo del resto
-     const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 
-                     'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
 
-     var dni = event.target.value;
 
-     // Comprobamos si el DNI tiene 8 dígitos y una letra
-     if (!DNI_pattern.test(dni)) {
-         event.target.setCustomValidity("El DNI debe tener 8 dígitos y 1 letra");
-     } else {
-         // Obtenemos los números
-         var numDNI = parseInt(dni.substring(0, 8));
-         // Obtenemos la letra
-         var letraDNI = dni.substring(8, 9);
-         // Calculamos la letra correspondiente al número
-         var letraCorrecta = letras[numDNI % 23];
-
-         if (letraDNI !== letraCorrecta) {
-             event.target.setCustomValidity("El DNI no es correcto");
-         } else {
-             event.target.setCustomValidity(""); // La entrada es válida
-         }
-     }
-}
 
 class User{
     constructor (dni, nombre, telf, email){
@@ -175,17 +166,171 @@ function register(event){
     }
     var index = users.findIndex(user => user.dni === dni);
     if (index != -1){
-        alert("El usuario ya existe");
+        alert("El usuario ya existe, se ha iniciado sesión automáticamente");
+        current_user = user;
+        console.log("Usuario registrado correctamente" + current_user);
+        const reg_bot = document.getElementById("open_reg");
+        reg_bot.innerText = "Registrado";
+        reg_bot.disabled = true;
+        closeRegPopup();
+        return;
+    }
+    if (!checkRegister()){
+        alert("El formulario no es válido");
         return;
     }
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
+
+    // iniciar sesión
+    current_user = user;
+    console.log("Usuario registrado correctamente" + current_user);
+
+    // change the name of the button from "Registrarse" to "Registrado"
+    const reg_bot = document.getElementById("open_reg");
+    reg_bot.innerText = "Registrado";
+    
+    // disable the button
+    reg_bot.disabled = true;
+
+    // close the popup
+
+
     closeRegPopup();
     alert("Usuario registrado correctamente");
+
+}
+function checkRegister(){
+    // check all inputs are valid and return true if they are
+    var valid = true;
+    const dni = document.getElementById("dni").value;
+    const nombre = document.getElementById("nom_ap").value;
+    const telf = document.getElementById("telf").value;
+    const email = document.getElementById("email").value;
+
+    // check dni
+    const DNI_pattern = /^[0-9]{8}[A-Z]{1}$/;
+    // Letras que toma el DNI dependiendo del resto
+    const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B',
+        'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+    if (!DNI_pattern.test(dni)) {
+        console.log("dni incorrecto");
+        valid = false;
+    } else {
+        // Obtenemos los números
+        var numDNI = parseInt(dni.substring(0, 8));
+        // Obtenemos la letra
+        var letraDNI = dni.substring(8, 9);
+        // Calculamos la letra correspondiente al número
+        var letraCorrecta = letras[numDNI % 23];
+        if (letraDNI !== letraCorrecta) {
+            console.log("letra dnni incorrecta");
+            valid = false;
+        } else {
+            valid = true;
+        }
+    }
+    // check nombre
+    const name_pattern = /^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$/;
+    if (!name_pattern.test(nombre)) {
+        console.log("nombre incorrecto");
+        valid = false;
+    }
+    // check telf
+    const telf_pattern = /^[0-9]{9}$/;
+    if (!telf_pattern.test(telf)) {
+        console.log("telf incorrecto");
+        valid = false;
+    }
+    // check email
+    const email_pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!email_pattern.test(email)) {
+        console.log("email incorrecto");
+        valid = false;
+    }
+
+    return valid;
+}
+
+function dniInput(event){
+    const DNI_pattern = /^[0-9]{8}[A-Z]{1}$/
+    // Letras que toma el DNI dependiendo del resto
+    const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 
+                    'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+
+    var dni = document.getElementById("dni").value;
+    var dni_input = document.getElementById("dni");
+
+    // Comprobamos si el DNI tiene 8 dígitos y una letra
+    if (!DNI_pattern.test(dni)) {
+        dni_input.setCustomValidity("El DNI debe tener 8 dígitos y 1 letra");
+    } else {
+        // Obtenemos los números
+        var numDNI = parseInt(dni.substring(0, 8));
+        // Obtenemos la letra
+        var letraDNI = dni.substring(8, 9);
+        // Calculamos la letra correspondiente al número
+        var letraCorrecta = letras[numDNI % 23];
+
+        if (letraDNI !== letraCorrecta) {
+            dni_input.setCustomValidity("El DNI no es correcto");
+        } else {
+            dni_input.setCustomValidity(""); // La entrada es válida
+        }
+    }
+    dni_input.reportValidity();
+}
+
+function nameInput(event){
+    // patron: Nombre Apellido1 Apellido2
+    const name_pattern = /^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$/;
+    var nombre = document.getElementById("nom_ap").value;
+    var nombre_input = document.getElementById("nom_ap");
+
+    if (!name_pattern.test(nombre)){
+        nombre_input.setCustomValidity("El nombre no es válido");
+    } else {
+        nombre_input.setCustomValidity("");
+    }
+    nombre_input.reportValidity();
+}
+
+function telfInput(event){
+    // patron: 9 dígitos
+    const telf_pattern = /^[0-9]{9}$/;
+    var telf = document.getElementById("telf").value;
+    var telf_input = document.getElementById("telf");
+
+    if (!telf_pattern.test(telf)){
+        telf_input.setCustomValidity("El teléfono no es válido");
+    } else {
+        telf_input.setCustomValidity("");
+    }
+    telf_input.reportValidity();
+}
+
+function emailInput(event){
+    // patron: email
+    const email_pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    var email = document.getElementById("email").value;
+    var email_input = document.getElementById("email");
+
+    if (!email_pattern.test(email)){
+        email_input.setCustomValidity("El email no es válido");
+    } else {
+        email_input.setCustomValidity("");
+    }
+    email_input.reportValidity();
 }
 
 // RELIZAR PEDIDO
 function openPedidoPopup() {
+
+    if (current_user == null){
+        alert("Debes iniciar sesión para realizar un pedido");
+        return;
+    }
+
     const pedido_popup = document.getElementById("pedido_popup");
     pedido_popup.style.display = "flex";
     pedido_popup.style.visibility = "visible";
@@ -367,6 +512,16 @@ function irEstado() {
     miga_paso_2.innerText = "Revisar pedido";
     miga_paso_1.style.textDecoration = "line-through";
     miga_paso_1.style.color = "#b3bec9";
+
+    // guardar el pedido en el local storage
+    var pedidos = JSON.parse(localStorage.getItem("pedidos"));
+    if (pedidos == null){
+        pedidos = [];
+    }
+    var pedido = new Pedido(current_user, contenido_pedido);
+    pedidos.push(pedido);
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
 }
 
 function irEstadoBc() {
