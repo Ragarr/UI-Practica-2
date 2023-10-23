@@ -20,22 +20,38 @@
 <body>
 
     <section id="page1">
-        <h3 style="visibility: hidden; font-size: 0;">Inicio</h3>
+        <h3>Inicio</h3>
         <div id="col_izq1">
             <img id="logo" src="media/img/logo.png" alt="Logo del restaurante">
             <video id="video" autoplay loop muted playsinline src="media/video/compressed.m4v"></video>
         </div>
+        <div id="col_opciones">
+            <img id="logo2" src="media/img/logo.png" alt="Logo del restaurante">
+
+            <div class='menu_de_hamburguesa'>
+                <div class='title pointerCursor'>Opciones<i class="fa fa-angle-right"></i></div>
+                
+                <div class='opciones_menu pointerCursor hide'>
+                    <div class='option' id='option1'>Inicio</div>
+                    <div class='option' id='option2'>Menú</div>
+                    <div class='option' id='option3'>Nuestros chefs</div>
+                    <div class='option' id='option4'>Sobre nosotros</div>
+                    <div class='option' id='option5'>Registro</div>
+                    <div class='option' id='option6'>Realizar pedido</div>
+                </div>
+            </div>
+        </div>
         <div id="col_der1">
-            <a href="#page1">
+            <a id="btn_inicio" href="#page1">
                 <div class="caja">Inicio</div>
             </a>
-            <a href="#page2">
+            <a id="btn_menu" href="#page2">
                 <div class="caja">Menu</div>
             </a>
-            <a href="#page3">
+            <a id="btn_chefs" href="#page3">
                 <div class="caja">Nuestros chefs</div>
             </a>
-            <a href="#page4">
+            <a id="btn_nosotros" href="#page4">
                 <div class="caja">Sobre Nosotros</div>
             </a>
 
@@ -355,8 +371,8 @@
                     </div>
                     
                 </div>
+            </div>
         </div>
-    </div>
     </section>
 
 
@@ -440,7 +456,7 @@
                                     <img src="media/img/img1_3.jpg" alt="Tamales rellenos de pollo">
                                 </a>
                             </div>
-                        <div class="desc">Tamales rellenos de pollo</div>
+                        <div class="desc">Tamales rellenos</div>
                     </div>
                     <a class="prev" onclick="plusSlides(-1, 'carrusel1')">❮</a>
                     <a class="next" onclick="plusSlides(1, 'carrusel1')">❯</a>
@@ -493,7 +509,7 @@
                                     <img src="media/img/img3_2.jpg" alt="Churros con chocolate caliente">
                                 </a>
                             </div>
-                        <div class="desc">Churros con chocolate caliente</div>
+                        <div class="desc">Churros con chocolate</div>
                     </div>
                     <div class="img_con_desc">
                             <div class="image-wraper">
