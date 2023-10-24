@@ -370,7 +370,8 @@ function horaInput(event){
     var hora_actual = new Date().getHours();
     var hora_seleccionada = parseInt(hora.split(":")[0]);
     if (hora_seleccionada < 12 || hora_seleccionada > 23){
-        input.setCustomValidity("La hora debe ser posterior a las 12 y anterior a las 23");
+        input.setCustomValidity("El restaurante no se encuentra abierto en la hora seleccionada.\
+                                La hora debe ser posterior a las 12h y anterior a las 23h");
     } else {
         input.setCustomValidity("");
     }
