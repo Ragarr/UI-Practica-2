@@ -469,7 +469,7 @@ button{
 }
 
 .carrusel {
-    height: 100%;
+    height: fit-content;
     width: auto;
     display: block;
     align-items: center;
