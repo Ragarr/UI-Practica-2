@@ -672,6 +672,10 @@ function pauseAutocarrusel(carruselId){
 
 function resumeAutocarrusel(carruselId){
     // Los coordinamos haciendo que se esperen entre ellos
+    if (startTime == null) {
+        startTime = Date.now();
+    }
+    
     wait = Math.max(0, 3000 - (Date.now() - startTime));
     setTimeout(function(){
         interval_carrusel[carruselId] = startAutocarrusel(carruselId);
@@ -737,7 +741,7 @@ function animateScroll(page) {
     }
     else if (getPositionOfPage(page) - window.innerHeight * 1 > 0 && page.style.opacity == 1) {
         // console.log("Posicion de " + page.id + ": " + getPositionOfPage(page));
-        $(page).animate({ opacity: 0 }, 500);
+        page.style.opacity = 0;
     }
 }
 
