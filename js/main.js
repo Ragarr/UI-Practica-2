@@ -510,6 +510,14 @@ function irEstado() {
     const miga_paso_2 = document.getElementById("bc_revisar");
     const miga_paso_3 = document.getElementById("bc_estado");
 
+
+    // comprobar si hay elementos en el pedido
+    if (contenido_pedido.length == 0) {
+        alert("No hay elementos en el pedido");
+        return;
+    }
+    
+    
     Paso2.style.visibility = "hidden";
     Paso2.style.display = "none";
     Paso3.style.visibility = "visible";
