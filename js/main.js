@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const email_input = document.getElementById("email");
     email_input.addEventListener("input", emailInput);
 
-
     // Apertura y cierre del popup de pedido
     const openPedidoButton = document.getElementById("open_pedido");
     const closePedidoButton = document.getElementById("close_pedido");
@@ -222,7 +221,6 @@ function checkRegister(){
     const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B',
         'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
     if (!DNI_pattern.test(dni)) {
-        console.log("dni incorrecto");
         valid = false;
     } else {
         // Obtenemos los números
@@ -232,28 +230,24 @@ function checkRegister(){
         // Calculamos la letra correspondiente al número
         var letraCorrecta = letras[numDNI % 23];
         if (letraDNI !== letraCorrecta) {
-            console.log("letra dnni incorrecta");
             valid = false;
         } else {
             valid = true;
         }
     }
     // check nombre
-    const name_pattern = /^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$/;
+    const name_pattern = /(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$/;
     if (!name_pattern.test(nombre)) {
-        console.log("nombre incorrecto");
         valid = false;
     }
     // check telf
     const telf_pattern = /^[0-9]{9}$/;
     if (!telf_pattern.test(telf)) {
-        console.log("telf incorrecto");
         valid = false;
     }
     // check email
     const email_pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!email_pattern.test(email)) {
-        console.log("email incorrecto");
         valid = false;
     }
 
@@ -291,26 +285,32 @@ function dniInput(event){
 
 function nameInput(event){
     // patron: Nombre Apellido1 Apellido2
-    const name_pattern = /^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$/;
+    const name_pattern = /(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$/;
     var nombre = document.getElementById("nom_ap").value;
     var nombre_input = document.getElementById("nom_ap");
 
     if (!name_pattern.test(nombre)){
-        nombre_input.setCustomValidity("El nombre no es válido");
+        nombre_input.setCustomValidity("El nombre no es válido, debe empezar por una mayúscula y estar acompañado\
+                                        de al menos una minúscula. Debe facilitar al menos un apellido \
+                                        empezando por mayúscula y acompañado como mínimo de una minúscula.\
+                                        El nombre y los apellidos deben separarse con un espacio.");
     } else {
         nombre_input.setCustomValidity("");
     }
     nombre_input.reportValidity();
 }
 
+
 function telfInput(event){
     // patron: 9 dígitos
-    const telf_pattern = /^[0-9]{9}$/;
+    const telf_pattern = /[9,8]{1}[1-8]{1}[0-9]{7}/;
     var telf = document.getElementById("telf").value;
     var telf_input = document.getElementById("telf");
 
     if (!telf_pattern.test(telf)){
-        telf_input.setCustomValidity("El teléfono no es válido");
+        telf_input.setCustomValidity("El teléfono no es válido, los télefonos fijos \
+                                    empiezan por 9 u 8 siguiendo el formato 9AX XX XX XX o \
+                                    8AX XX XX XX, siendo A una cifra distinta de 0 o de 9.");
     } else {
         telf_input.setCustomValidity("");
     }
@@ -324,7 +324,9 @@ function emailInput(event){
     var email_input = document.getElementById("email");
 
     if (!email_pattern.test(email)){
-        email_input.setCustomValidity("El email no es válido");
+        email_input.setCustomValidity("El email no es válido, debe seguir un patrón como el\
+                                     del ejemplo. Nombre, seguido de @, seguido del dominio, \
+                                     seguido de ., seguido de la extensión");
     } else {
         email_input.setCustomValidity("");
     }
