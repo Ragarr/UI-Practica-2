@@ -112,6 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Botón identíficate
     const identificate = document.getElementById("open_reg_2");
     identificate.addEventListener('click', openRegPopup2);
+
+    // formulario de reserva
+    const nombre_input2 = document.getElementById("nom_ap2");
+    nombre_input2.addEventListener("input", nameInput);
+    const telf_input2 = document.getElementById("telf2");
+    telf_input2.addEventListener("input", telfInput);
 });
 
 
@@ -348,7 +354,6 @@ function openPedidoPopup() {
     pedido_popup.style.display = "flex";
     pedido_popup.style.visibility = "visible";
     document.body.style.overflow = "hidden";
-    current_order_step = 1; // Paso actual del pedido
 }
 function closePedidoPopup() {
     const pedido_popup = document.getElementById("pedido_popup");
