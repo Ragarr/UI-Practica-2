@@ -3,8 +3,9 @@ var current_order_step = 0; // Paso actual del pedido
 var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
 var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
-let slideIndex = {};
-let interval_carrusel = {};
+var slideIndex = {};
+var interval_carrusel = {};
+var startTime = null; // Hora de inicio del temporizador
 // Llama a la función de inicialización para cada carrusel
 var carruselIds = ["carrusel1", "carrusel2", "carrusel3", "carrusel4", "carrusel5"];
 for (var i = 0; i < carruselIds.length; i++) {
@@ -118,6 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
     nombre_input2.addEventListener("input", nameInput);
     const telf_input2 = document.getElementById("telf2");
     telf_input2.addEventListener("input", telfInput);
+    const fecha_input = document.getElementById("fecha");
+    fecha_input.addEventListener("input", dateInput);
+    const hora_input = document.getElementById("hora");
+    hora_input.addEventListener("input", horaInput);
+
 });
 
 
@@ -293,38 +299,84 @@ function dniInput(event){
 }
 
 function nameInput(event){
-    // patron: Nombre Apellido1 Apellido2
+    // patron: Nombre Apellido1 
     const name_pattern = /(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$/;
-    var nombre = document.getElementById("nom_ap").value;
-    var nombre_input = document.getElementById("nom_ap");
+    
+    var input = event.target;
+    var nombre = input.value;
 
     if (!name_pattern.test(nombre)){
-        nombre_input.setCustomValidity("El nombre no es válido, debe empezar por una mayúscula y estar acompañado\
+        input.setCustomValidity("El nombre no es válido, debe empezar por una mayúscula y estar acompañado\
                                         de al menos una minúscula. Debe facilitar al menos un apellido \
                                         empezando por mayúscula y acompañado como mínimo de una minúscula.\
                                         El nombre y los apellidos deben separarse con un espacio.");
     } else {
-        nombre_input.setCustomValidity("");
+        input.setCustomValidity("");
+        console.log("nombre válido");
     }
-    nombre_input.reportValidity();
+    input.reportValidity();
 }
 
 
 function telfInput(event){
     // patron: 9 dígitos
     const telf_pattern = /[9,8]{1}[1-8]{1}[0-9]{7}/;
-    var telf = document.getElementById("telf").value;
-    var telf_input = document.getElementById("telf");
+
+    var input = event.target;
+    var telf = input.value;
 
     if (!telf_pattern.test(telf)){
-        telf_input.setCustomValidity("El teléfono no es válido, los télefonos fijos \
+        input.setCustomValidity("El teléfono no es válido, los télefonos fijos \
                                     empiezan por 9 u 8 siguiendo el formato 9AX XX XX XX o \
                                     8AX XX XX XX, siendo A una cifra distinta de 0 o de 9.");
     } else {
-        telf_input.setCustomValidity("");
+        input.setCustomValidity("");
     }
-    telf_input.reportValidity();
+    input.reportValidity();
 }
+
+
+function dateInput(event){
+    // revisar que la fecha es válida
+    var input = event.target;
+    var fecha = input.value;
+
+    if (fecha == ""){
+        input.setCustomValidity("Debe introducir una fecha");
+    } else {
+        input.setCustomValidity("");
+    }
+    // comprobar que la fecha es posterior a la actual
+    var fecha_actual = new Date();
+    var fecha_seleccionada = new Date(fecha);
+    if (fecha_seleccionada < fecha_actual){
+        input.setCustomValidity("La fecha debe ser posterior a la actual");
+    } else {
+        input.setCustomValidity("");
+    }
+    input.reportValidity();
+}
+
+function horaInput(event){
+    // revisar que la hora es válida
+    var input = event.target;
+    var hora = input.value;
+    console.log(hora);
+    // formato hora HH:MM
+    // comprobar que es posterior a las 12 y anterior a las 23
+    if (hora == ""){
+        input.setCustomValidity("Debe introducir una hora");
+    }
+    var hora_actual = new Date().getHours();
+    var hora_seleccionada = parseInt(hora.split(":")[0]);
+    if (hora_seleccionada < 12 || hora_seleccionada > 23){
+        input.setCustomValidity("La hora debe ser posterior a las 12 y anterior a las 23");
+    } else {
+        input.setCustomValidity("");
+    }
+    input.reportValidity();
+}
+
 
 function emailInput(event){
     // patron: email
