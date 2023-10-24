@@ -184,6 +184,7 @@ function register(event){
         reg_bot.disabled = true;
         identificate_btn.innerText = user.nombre;
         identificate_btn.disabled = true;
+        current_user = user;
         closeRegPopup();
         return;
     }
@@ -198,8 +199,10 @@ function register(event){
     reg_bot.innerText = "Ya estás registrado";
     reg_bot.disabled = true;
 
+    current_user = user;
+
     // cambiamos texto "Identifícate" a el nombre del ususario
-    identificate_btn.innerText = user.nombre;
+    identificate_btn.innerText = current_user.nombre;
     identificate_btn.disabled = true;
 
     // close the popup
