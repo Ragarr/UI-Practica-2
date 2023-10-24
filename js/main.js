@@ -3,7 +3,6 @@ var current_order_step = 0; // Paso actual del pedido
 var remainingTime = 600; // Tiempo restante en segundos
 var interval; // Intervalo de tiempo para actualizar el temporizador
 var contenido_pedido = []; // Contenido del pedido nombre_plato: cantidad
-// Inicializa los índices de carrusel
 let slideIndex = {};
 let interval_carrusel = {};
 // Llama a la función de inicialización para cada carrusel
@@ -19,13 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlides(1, carruselIds[i]);
       }
 
-    // apertura y cierre del popup de registro
+    // Apertura y cierre del popup de registro
     const openRegButton = document.getElementById("open_reg");
     const closeRegButton = document.getElementById("close_reg");
     openRegButton.addEventListener("click", openRegPopup);
     closeRegButton.addEventListener("click", closeRegPopup);
 
-    // input en los campos del formulario de registro
+    // Input en los campos del formulario de registro
     const dni_input = document.getElementById("dni");
     dni_input.addEventListener("input", dniInput);
     const nombre_input = document.getElementById("nom_ap");
@@ -36,12 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
     email_input.addEventListener("input", emailInput);
 
 
-    // apertura y cierre del popup de pedido
+    // Apertura y cierre del popup de pedido
     const openPedidoButton = document.getElementById("open_pedido");
     const closePedidoButton = document.getElementById("close_pedido");
     openPedidoButton.addEventListener("click", openPedidoPopup);
     closePedidoButton.addEventListener("click", closePedidoPopup);
-    // cierre de los popup cuando el usuario hace click fuera de ellos
+
+    // Cierre de los popup cuando el usuario hace click fuera de ellos
     window.addEventListener("click", function (event) {
         if (event.target === reg_popup) {
             closeRegPopup();
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 
-    // botones de seleccion del pedido
+    // Botones de seleccion del pedido
     const platosMenu = document.querySelectorAll('.plato_menu');
     platosMenu.forEach(plato => {
         var botonMas = plato.querySelector('.añadir_producto');
@@ -59,11 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
         botonMas.addEventListener('click', añadir_producto);
         botonMenos.addEventListener('click', quitar_producto);
     });
+
     // Limpiar el carrito
     const limpiarCarrito = document.getElementById("limpiar_selecciones");
     limpiarCarrito.addEventListener("click", resetProductos);
 
-    // botones de navegación entre pasos
+    // Botones de navegación entre pasos
     const bc_revisar = document.getElementById("bc_revisar");
     const bc_seleccionar = document.getElementById("bc_seleccionar");
     const bc_estado = document.getElementById("bc_estado");
@@ -80,13 +81,13 @@ document.addEventListener("DOMContentLoaded", function () {
     botonIrPaso2.addEventListener("click", irRevisar);
     botonIrPaso3.addEventListener("click", irEstado);
 
-    // boton cancelar
+    // Boton cancelar
     const botonCancelar = document.querySelectorAll(".btn_cancelar");
     botonCancelar.forEach(boton => {boton.addEventListener("click", cancelarPedido);});
     const botonFinalizar = document.getElementById("btn_finalizar");
     botonFinalizar.addEventListener("click", closePedidoPopup);
 
-    // submit registro
+    // Submit registro
     const botonSubmit = document.getElementById("submit_reg");
     botonSubmit.addEventListener("click", register);
 
@@ -105,9 +106,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropdownTitle = document.querySelector('.menu_de_hamburguesa .title');
     const dropdownOptions = document.querySelectorAll('.menu_de_hamburguesa .option');
 
-    //vincula listeners a estos elementos
+    // Vincula listeners al menú de hamburguesa
     dropdownTitle.addEventListener('click', toggleMenuDisplay);
     dropdownOptions.forEach(option => option.addEventListener('click',handleOptionSelected));
+
+    // Botón identíficate
+    const identificate = document.getElementById("open_reg_2");
+    identificate.addEventListener('click', openRegPopup2);
 });
 
 
@@ -133,6 +138,10 @@ function openRegPopup() {
     reg_popup.style.visibility = "visible";
     document.body.style.overflow = "hidden";
 }
+function openRegPopup2() {
+    // Simulamos click en botón principal
+    open_reg.click();
+}
 function closeRegPopup() {
     const reg_popup = document.getElementById("reg_popup");
     reg_popup.style.display = "none";
@@ -140,8 +149,6 @@ function closeRegPopup() {
     const form = reg_popup.querySelector("form");
     form.reset();
 }
-
-
 
 
 class User{
@@ -161,9 +168,10 @@ function register(event){
     const nombre = document.getElementById("nom_ap").value;
     const telf = document.getElementById("telf").value;
     const email = document.getElementById("email").value;
+    const reg_bot = document.getElementById("open_reg");
+    const identificate_btn = document.getElementById("open_reg_2");
     
     var user = new User(dni, nombre, telf, email);
-    console.log(user);
     
     // comprobar si el usuario ya existe
     var users = JSON.parse(localStorage.getItem("users"));
@@ -173,11 +181,10 @@ function register(event){
     var index = users.findIndex(user => user.dni === dni);
     if (index != -1){
         alert("El usuario ya existe, se ha iniciado sesión automáticamente");
-        current_user = user;
-        console.log("Usuario registrado correctamente" + current_user);
-        const reg_bot = document.getElementById("open_reg");
-        reg_bot.innerText = "Registrado";
+        reg_bot.innerText = "Ya estás registrado";
         reg_bot.disabled = true;
+        identificate_btn.innerText = user.nombre;
+        identificate_btn.disabled = true;
         closeRegPopup();
         return;
     }
@@ -188,20 +195,15 @@ function register(event){
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
 
-    // iniciar sesión
-    current_user = user;
-    console.log("Usuario registrado correctamente" + current_user);
-
     // change the name of the button from "Registrarse" to "Registrado"
-    const reg_bot = document.getElementById("open_reg");
-    reg_bot.innerText = "Registrado";
-    
-    // disable the button
+    reg_bot.innerText = "Ya estás registrado";
     reg_bot.disabled = true;
 
+    // cambiamos texto "Identifícate" a el nombre del ususario
+    identificate_btn.innerText = user.nombre;
+    identificate_btn.disabled = true;
+
     // close the popup
-
-
     closeRegPopup();
     alert("Usuario registrado correctamente");
 

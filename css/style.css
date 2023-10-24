@@ -26,8 +26,25 @@ AUTORES: Natalia Rodríguez Navarro 100471976
 /*TABLET Y MÓVIL*/
 @media screen and (max-width: 768px) {
     body {    
+        margin-top: 10%;
         padding-right: 5%;
         padding-left: 5%;
+    }
+
+    p {
+        font-size: 5vw !important;
+    }
+
+    li {
+        font-size: 4.5vw !important;
+    }
+
+    h1 {
+        font-size: 6vw !important;
+    }
+
+    input{
+        font-size: 2.4vw !important;
     }
 
     #page1 {
@@ -36,7 +53,7 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     }
 
     #page1 {
-        max-height: 45vh;
+        max-height: 35vh;
     }
 
     #page1 #col_izq1{
@@ -45,33 +62,56 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     }
 
     #page1 #logo{
-        visibility: hidden;
+        top: 15%;
     }
 
-    #page1 #col_opciones{
-        display: block;
-        width: 100%;
+    #menu_de_hamburguesa_container{
+        height: fit-content;
+        width: 97%;
+        position: fixed;
+        top: -1px;
+        padding: 5px; 
+        display: flex !important;
+        align-items:flex-start;
+        justify-content: space-between;
+        z-index: 7;
+        background-color: #B4B4B3;
+        border: 6px solid #EBE4D1;
+        border-bottom-left-radius: 20px ;
+        border-bottom-right-radius: 20px ;
     }
 
-    #col_opciones #logo2{
-        float: left;
-        position: absolute;
-        width: 100%;
-        max-width: 20%;
-        margin-left: 3%;
-    }
-
-    #page1 .menu_de_hamburguesa{
+    .menu_de_hamburguesa{
         width: fit-content;
         display: flex;
-        float: right;
-        order: 1;
-        font-family: 'carlmarx';
-        font-size: 4vw;
-        margin-right: 1.5%;
+        font-family: 'carlmarx';   
+        font-size: 100%;
+        margin: 0%;
         color:#ce5b18;
         border: 0.1em solid #ce5b18;
         border-radius: 20px;
+        height: 100%;
+    }
+
+    #identificate{
+        width: fit-content;
+        float: right;
+    }
+
+    #identificate button{
+        font-family: 'carlmarx';
+        font-size: 4.5vw;
+    }
+
+    #identificate .open_popup:hover{
+        font-style: normal;
+        background-color: #b8a59b;
+    }
+
+    #identificate img{
+        width: 3.5vw;
+        max-width: 100%;
+        margin: 4%;
     }
 
     .hide {
@@ -81,6 +121,7 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     .menu_de_hamburguesa .title{
         margin: .3em .3em .3em .3em;	
         width: 100%;
+        font-size: 4vw;
     }
     
     .menu_de_hamburguesa .title .fa-angle-right{
@@ -98,7 +139,7 @@ AUTORES: Natalia Rodríguez Navarro 100471976
     .menu_de_hamburguesa .opciones_menu .option{
         margin: .3em .3em .3em .3em;
         margin-top: 0.3em;
-        font-size: 3vw;
+        font-size: 4vw;
         color:#683415;
     }
     
@@ -322,9 +363,10 @@ button{
     display: flex;
 }
 
-#col_opciones{
+#menu_de_hamburguesa_container{
     display: none;
 }
+
 
 /*PÁGINA 1 - COLUMNA IZQUIERDA - VÍDEO Y LOGO*/
 #col_izq1 {

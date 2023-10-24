@@ -18,6 +18,25 @@
 
 
 <body>
+    <section id="menu_de_hamburguesa_container">
+        <div class='menu_de_hamburguesa'>
+            <div class='title pointerCursor'>Opciones<i class="fa fa-angle-right"></i></div>
+            
+            <div class='opciones_menu pointerCursor hide'>
+                <div class='option' id='option1'>Inicio</div>
+                <div class='option' id='option2'>Menú</div>
+                <div class='option' id='option3'>Nuestros chefs</div>
+                <div class='option' id='option4'>Sobre nosotros</div>
+                <div class='option' id='option5'>Registro</div>
+                <div class='option' id='option6'>Realizar pedido</div>
+            </div>
+        </div>
+
+        <div id="identificate">
+            <button class="open_popup" id="open_reg_2">Identifícate<img id="sig_in_logo" 
+                src="media/img/sign_in.png" alt="Icono de registro"></button>
+        </div>
+    </section>
 
     <section id="page1">
         <h3>Inicio</h3>
@@ -25,22 +44,7 @@
             <img id="logo" src="media/img/logo.png" alt="Logo del restaurante">
             <video id="video" autoplay loop muted playsinline src="media/video/compressed.m4v"></video>
         </div>
-        <div id="col_opciones">
-            <img id="logo2" src="media/img/logo.png" alt="Logo del restaurante">
-
-            <div class='menu_de_hamburguesa'>
-                <div class='title pointerCursor'>Opciones<i class="fa fa-angle-right"></i></div>
-                
-                <div class='opciones_menu pointerCursor hide'>
-                    <div class='option' id='option1'>Inicio</div>
-                    <div class='option' id='option2'>Menú</div>
-                    <div class='option' id='option3'>Nuestros chefs</div>
-                    <div class='option' id='option4'>Sobre nosotros</div>
-                    <div class='option' id='option5'>Registro</div>
-                    <div class='option' id='option6'>Realizar pedido</div>
-                </div>
-            </div>
-        </div>
+  
         <div id="col_der1">
             <a id="btn_inicio" href="#page1">
                 <div class="caja">Inicio</div>
@@ -72,7 +76,7 @@
                             <div>
                                 <label for="nom_ap">Nombre y Apellidos:</label>
                                 <input type="text" id="nom_ap" name="nom_ap" required
-                                placeholder="Nombre Apellido1 Apellido2*" 
+                                placeholder="Nombre Apellido1 Apellido2" 
                                 pattern="(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$"
                                 autocomplete="name">
                             </div>
@@ -621,7 +625,7 @@
                     Hacer una reserva
                 </h2>
                 <div class = "field_reserva">
-                    <label for="nombre">Nombre:</label>
+                    <label for="nombre">Nombre y Apellidos:</label>
                     <input type="text" id="nombre" name="nombre" required 
                     placeholder="Nombre Apellido1 Apellido2*" 
                     pattern="(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){1,})(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+){0,})?$"
