@@ -465,7 +465,6 @@ function irRevisar() {
     if (current_order_step != 3) {
         miga_paso_3.style.color = "#b3bec9";
     }
-    miga_paso_1.style.color = "#01447e";
     if (current_order_step == 1) {
         current_order_step = 2; // Paso actual del pedido
     }
@@ -516,7 +515,7 @@ function irEstado() {
         alert("No hay elementos en el pedido");
         return;
     }
-    
+
     
     Paso2.style.visibility = "hidden";
     Paso2.style.display = "none";
